@@ -286,7 +286,7 @@
                   "applications:vesktop.desktop"
                   "applications:thunderbird.desktop"
                   "applications:steam.desktop"
-                  "applications:Blender (Latest).desktop"
+                  "file:/home/adam/.local/share/Steam/steamapps/common/Blender/blender.desktop"
                   "applications:org.kde.krita.desktop"
                 ];
               };

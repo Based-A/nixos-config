@@ -121,6 +121,7 @@
     NIXPKGS_ALLOW_UNFREE = "1";
     BROWSER = "app.zen_browser.zen";
     TERM = "ghostty";
+    QT_QPA_PLATFORM = "xcb";
   };
 
   # This value determines the NixOS release from which the default
