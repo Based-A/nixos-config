@@ -20,7 +20,6 @@
   file-cleanup.enable = true;
   nvidia-graphics.enable = false;
   power-management.enable = false;
-  sops-nix.enable = true;
 
   ## Services
   docker.enable = false;

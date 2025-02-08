@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs = {
       url = "github:nixos/nixpkgs?ref=nixos-unstable";
-#      follows = "nixos-cosmic/nixpkgs"; COSMIC doesn't build, will enable when it works.
+      #follows = "nixos-cosmic/nixpkgs"; #COSMIC doesn't build, will enable when it works.
     };
 
     home-manager = {
@@ -114,7 +114,7 @@
             ];
           };
 
-        # Home Server
+        # macOS VM
         sachiel =
           let
             host = "sachiel";
@@ -133,7 +133,7 @@
             modules = [
               ./hosts/${host}/configuration.nix
               ./modules/nixos
-              sops-nix.nixosModules.sops
+              inputs.sops-nix.nixosModules.sops
             ];
           };
 
@@ -155,7 +155,7 @@
             modules = [
               ./hosts/${host}/configuration.nix
               ./modules/nixos
-              sops-nix.nixosModules.sops
+              inputs.sops-nix.nixosModules.sops
             ];
           };
       };

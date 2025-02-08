@@ -15,12 +15,13 @@
       enable = true;
       hostName = "localhost";
       config = {
-        adminpassFile = "/etc/nextcloud-admin-pass";
+        adminpassFile = "/run/secrets/nextcloudPassword";
       };
+      secretFile = "/run/secrets/nextcloudPassword";
     };
 
     networking.firewall.allowedTCPPorts = [ 80 443 ];
 
-    environment.etc."nextcloud-admin-pass".text = "PdCsB6xGJg86hG";
+    #Reference: https://wiki.nixos.org/w/index.php?title=Nextcloud
   };
 }

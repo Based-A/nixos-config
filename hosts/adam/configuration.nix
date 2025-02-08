@@ -6,6 +6,7 @@
 }:
 
 {
+  # Main Workstation Computer
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -20,7 +21,6 @@
   file-cleanup.enable = true;
   nvidia-graphics.enable = true;
   power-management.enable = false;
-  sops-nix.enable = true;
 
   ## Services
   docker.enable = false;
@@ -34,7 +34,6 @@
 
   ## Packages
   audio-apps.enable = true;
-  CoreApps.enable = true;
   digital-art.enable = true;
   game-dev.enable = true;
 
@@ -58,6 +57,20 @@
     jellyfin-web
     jellyfin-ffmpeg
   ];
+
+  sops = {
+    defaultSopsFile = ./../../modules/secrets/secrets.json;
+    defaultSopsFormat = "json";
+
+    age.keyFile = "/home/adam/.config/sops/age/keys.txt";
+
+    secrets.adam_ssh_key = {
+      path = "/home/adam/.ssh/id_ed25519";
+    };
+
+    secrets.nextcloudPassword = {
+    };
+  };
 
   # Programs
   programs = {
@@ -121,7 +134,6 @@
     NIXPKGS_ALLOW_UNFREE = "1";
     BROWSER = "app.zen_browser.zen";
     TERM = "ghostty";
-    QT_QPA_PLATFORM = "xcb";
   };
 
   # This value determines the NixOS release from which the default

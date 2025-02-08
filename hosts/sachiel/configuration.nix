@@ -6,6 +6,7 @@
 }:
 
 {
+  # macOS VirtualBox
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -20,13 +21,12 @@
   file-cleanup.enable = true;
   nvidia-graphics.enable = false;
   power-management.enable = false;
-  sops-nix.enable = true;
 
   ## Services
   docker.enable = false;
   home-assistant.enable = false;
   plex.enable = false;
-  podman.enable = true;
+  podman.enable = false;
   sunshine.enable = false;
 
   ## Other
@@ -35,6 +35,13 @@
   ## Desktop Environments
   Plasma6.enable = false;
   #CosmicDE.enable = true;
+  XfceWayfire.enable = true;
+
+  #System Packages
+  environment.systemPackages = with pkgs; [
+    quickemu
+    quickgui
+  ];
 
   # Boot Options
   boot = {
@@ -56,10 +63,7 @@
     hostName = "sachiel-nixos"; # Define your hostname.
     networkmanager.enable = true; # Enable networking.
     #wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-    firewall.allowedUDPPorts = [ 
-      47800
-      48002
-      48010
+    firewall.allowedUDPPorts = [
     ]; # Open ports in the firewall.
   };
 

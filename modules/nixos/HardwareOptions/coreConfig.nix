@@ -14,6 +14,16 @@
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+
+  environment.systemPackages = with pkgs; [
+    neovim
+    
+    # Git
+    git
+    gh
+
+    sops
+  ];
   
   # Local System Info
   ## Set your time zone.

@@ -22,5 +22,15 @@
       description = "guest profile";
       uid = 1001;
     };
+    macOS = {
+      isNormalUser = true;
+      description = "macOS VM user";
+      uid = 1002;
+    };
+    otto = {
+      isNormalUser = true;
+      description = "automation user profile";
+      uid = 1003;
+    };
   };
 }

@@ -36,7 +36,7 @@
       NIXOS_OZONE_WL = "1";
       MOZ_ENABLE_WAYLAND = "1";
       KWIN_DRM_ALLOW_NVIDIA_COLORSPACE = "1";
-      QT_QPA_PLATFORM = "wayland";
+      QT_QPA_PLATFORM = "wayland;xcb";
     };
   };
 }
