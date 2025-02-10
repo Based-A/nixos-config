@@ -66,6 +66,7 @@
 
     secrets.adam_ssh_key = {
       path = "/home/adam/.ssh/id_ed25519";
+      owner = config.users.users.adam.name;
     };
 
     secrets.nextcloudPassword = {
