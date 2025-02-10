@@ -36,6 +36,11 @@
     #    home-manager.follows = "home-manager";
     #  };
     #};
+
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -49,6 +54,7 @@
       sops-nix,
       #nixos-cosmic, #COSMIC
       #cosmic-manager, #COSMIC
+      disko,
       ...
     }@inputs:
 
@@ -134,6 +140,7 @@
               ./hosts/${host}/configuration.nix
               ./modules/nixos
               inputs.sops-nix.nixosModules.sops
+              inputs.disko.nixosModules.disko
             ];
           };
 
