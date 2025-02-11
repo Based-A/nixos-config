@@ -110,14 +110,14 @@
   };
 
   # Mount Windows Partition
-  #fileSystems."/run/media/adam/Windows" = {
-  #  device = "/dev/disk/by-uuid/E85E134D5E131442";
-  #  fsType = "ntfs";
-  #  options = [
-  #    "rw"
-  #    "uid = 1000"
-  #  ];
-  #};
+  fileSystems."/run/media/adam/Windows" = {
+    device = "/dev/disk/by-uuid/06C81129C811188F";
+    fsType = "ntfs";
+    options = [
+      "rw"
+      "uid = 1000"
+    ];
+  };
 
   # Networking Options
   networking = {
