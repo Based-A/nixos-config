@@ -62,7 +62,7 @@
     defaultSopsFile = ./../../modules/secrets/secrets.json;
     defaultSopsFormat = "json";
 
-    age.keyFile = "/home/adam/.config/sops/age/keys.txt";
+    age.keyFile = "/nix/persist/sops/age/keys.txt";
 
     secrets.adam_ssh_key = {
       path = "/home/adam/.ssh/id_ed25519";
@@ -70,6 +70,23 @@
     };
 
     secrets.nextcloudPassword = {
+    };
+  };
+
+  users.users = {
+    adam = {
+      isNormalUser = true;
+      description = "adam";
+      uid = 1000;
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
+    };
+    guest = {
+      isNormalUser = true;
+      description = "guest profile";
+      uid = 1001;
     };
   };
 

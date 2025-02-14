@@ -7,13 +7,13 @@
 }:
 {
   options = {
-    XfceWayfire.enable = lib.mkEnableOption "enables Xfce with Wayfire WM desktop";
+    Xfce.enable = lib.mkEnableOption "enables Xfce desktop";
   };
 
-  config = lib.mkIf config.XfceWayfire.enable {
+  config = lib.mkIf config.Xfce.enable {
     services = {
       xserver = {
-        enable = true;
+        enable = false;
         xkb = {
           layout = "us";
           variant = "";
@@ -22,13 +22,19 @@
           xterm.enable = false;
           xfce = {
             enable = true;
-            noDesktop = true;
             enableXfwm = false;
             enableWaylandSession = true;
+            noDesktop = true;
           };
         };
       };
       displayManager = {
+        sddm.enable = true;
+	sddm.wayland.enable = true;
+        autoLogin = {
+          enable = true;
+          user = "macOS";
+        };
         defaultSession = "wayfire";
       };
     };
@@ -38,10 +44,23 @@
       plugins = with pkgs.wayfirePlugins; [
         wcm
         wf-shell
+        wayfire-plugins-extra
       ];
     };
 
-    programs.xwayland.enable = true;
+    xdg.portal = {
+      enable = true;
+      wlr.enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-gtk
+      ];
+    };
+
+    environment.systemPackages = with pkgs; [
+      mako
+      swaylock
+      wlogout
+    ];
 
     environment.sessionVariables = {
       NIXOS_OZONE_WL = "1";

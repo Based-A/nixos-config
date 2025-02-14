@@ -42,6 +42,23 @@
     moonlight-qt
   ];
 
+  users.users = {
+    adam = {
+      isNormalUser = true;
+      description = "adam";
+      uid = 1000;
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+      ];
+    };
+    guest = {
+      isNormalUser = true;
+      description = "guest profile";
+      uid = 1001;
+    };
+  };
+
   # Programs
   programs = {
     firefox.enable = true;

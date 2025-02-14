@@ -15,8 +15,6 @@
     ./HardwareOptions/file-cleanup.nix
     ./HardwareOptions/nvidia-graphics.nix
     ./HardwareOptions/power-management.nix
-    # User Lists
-    ./HardwareOptions/userList.nix
 
     # Services
     ./Services/docker.nix
@@ -33,8 +31,8 @@
 
     # Environments
     ./Environments/Plasma6.nix
-#    ./Environments/CosmicDesktop.nix COSMIC doesn't build, will enable when fixed.
-    ./Environments/XfceWayfire.nix
+    #./Environments/CosmicDesktop.nix COSMIC doesn't build, will enable when fixed.
+    ./Environments/Xfce.nix
   ];
 
   # Module Defaults
@@ -58,5 +56,5 @@
 
   Plasma6.enable = lib.mkDefault false;
 #  CosmicDE.enable = lib.mkDefault false; COSMIC doesn't build, will enable when fixed.
-  XfceWayfire.enable = lib.mkDefault false;
+  Xfce.enable = lib.mkDefault false;
 }

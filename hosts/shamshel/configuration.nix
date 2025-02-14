@@ -36,6 +36,14 @@
   Plasma6.enable = false;
   #CosmicDE.enable = false;
 
+  users.users = {
+    nixPi = {
+      isNormalUser = true;
+      description = "nixPi";
+      uid = 1003;
+    };
+  };
+
   # Boot Options
   boot = {
     loader = {
