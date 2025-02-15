@@ -43,8 +43,6 @@
     quickemu
     quickgui
     xterm
-    waybar
-    wofi
     (google-fonts.override {
       fonts = [
         "Rubik"

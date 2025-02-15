@@ -30,11 +30,7 @@
       };
       displayManager = {
         sddm.enable = true;
-	sddm.wayland.enable = true;
-        autoLogin = {
-          enable = true;
-          user = "macOS";
-        };
+	      sddm.wayland.enable = true;
         defaultSession = "wayfire";
       };
     };
@@ -60,6 +56,8 @@
       mako
       swaylock
       wlogout
+      waybar
+      wofi
     ];
 
     environment.sessionVariables = {
