@@ -81,7 +81,7 @@
   #Git Config
   programs.git.config = {
     init.defaultBranch = "main";
-    safe.directory = "home/flake";
+    safe.directory = "/home/flake";
     user.name = "adam-macOSVM";
     user.email = "adamlundrigan1@gmail.com";
   };
@@ -136,5 +136,4 @@
   };
 
   system.stateVersion = "24.05"; # Did you read the comment?
-
 }
