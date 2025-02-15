@@ -37,6 +37,9 @@
 
     programs.wayfire = {
       enable = true;
+      plugins = with pkgs.wayfirePlugins; [
+        wcm
+      ];
     };
 
     xdg.portal = {
@@ -53,6 +56,14 @@
       wlogout
       waybar
       wofi
+
+      (google-fonts.override {
+        fonts = [
+          "Rubik"
+        ];
+      })
+      nerd-fonts.jetbrains-mono
+      font-awesome_5
     ];
 
     environment.sessionVariables = {

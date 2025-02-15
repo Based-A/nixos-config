@@ -43,12 +43,6 @@
     quickemu
     quickgui
     xterm
-    (google-fonts.override {
-      fonts = [
-        "Rubik"
-      ];
-    })
-    nerd-fonts.jetbrains-mono
   ];
 
   sops = {
