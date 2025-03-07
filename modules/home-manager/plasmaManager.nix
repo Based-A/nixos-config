@@ -34,11 +34,6 @@
           ];
         })
 
-        #General Packages
-        btop
-        sysz
-        fzf
-
         #Wayland
         egl-wayland
       ];

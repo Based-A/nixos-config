@@ -34,13 +34,26 @@
 
   ## Desktop Environments
   Plasma6.enable = true;
-  #CosmicDE.enable = true;
 
   environment.systemPackages = with pkgs; [
     home-manager
-
     moonlight-qt
   ];
+
+  sops = {
+    defaultSopsFile = ./../../modules/secrets/secrets.json;
+    defaultSopsFormat = "json";
+
+    age.keyFile = "/nix/persist/sops/age/keys.txt";
+
+    #secrets.adam_ssh_key = {
+    #  path = "/home/adam/.ssh/id_ed25519";
+    #  owner = config.users.users.adam.name;
+    #};
+
+    secrets.nextcloudPassword = {
+    };
+  };
 
   users.users = {
     adam = {

@@ -30,8 +30,11 @@
       brave
       thunderbird
       libreoffice
-      vesktop
-      inputs.ghostty.packages."${pkgs.system}".default
+      #inputs.ghostty.packages."${pkgs.system}".default
+      ghostty
+      (discord.override {
+        withVencord = true;
+      })
 
       # Utilities
       zip
@@ -42,7 +45,28 @@
       vlc
       localsend
       fastfetch
+      nushell
+      toybox
+      btop
+      sysz
+      fzf
+
+      #stylix
+      base16-schemes
     ];
+  };
+
+  stylix = {
+    enable = false;
+    autoEnable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-moon.yaml";
+    image = ./../../hosts/adam/adamBackground.jpg;
+    imageScalingMode = "fill";
+    polarity = "dark";
+    targets = {
+      qt.enable = false;
+      kde.enable = false;
+    };
   };
   
   programs = {
@@ -57,26 +81,26 @@
       };
     };
 
-    vscode = {
+    vscode.profiles.default = {
       enable = true;
       enableExtensionUpdateCheck = true;
       enableUpdateCheck = false;
 
       extensions = with pkgs.vscode-extensions; [
-
-        formulahendry.code-runner
-
         jnoortheen.nix-ide
-
-        ms-vscode.cmake-tools
-        llvm-vs-code-extensions.vscode-clangd
-        ms-dotnettools.csharp
-
-        sdras.night-owl
+        formulahendry.code-runner
+        johnpapa.vscode-peacock
+        ms-azuretools.vscode-docker
+        eamodio.gitlens
+        ms-vscode-remote.remote-ssh
+        pnp.polacode
+        pkief.material-icon-theme
+        tomoki1207.pdf
+        mechatroner.rainbow-csv
+        usernamehw.errorlens
       ];
 
       userSettings = lib.mkForce {
-
         "[nix]"."serverPath" = "nixd";
         "[nix]"."enableLanguageServer" = "true";
         "[nix]"."serverSettings"."nixd"."nixpkgs"."expr" = "import <nixpkgs> { }";
@@ -88,6 +112,17 @@
         "explorer.confirmDragAndDrop" = false;
         "editor.fontFamily" = "'Fira Code'";
         "terminal.integrated.fontFamily" = "'Inconsolata'";
+        "editor.cursorBlinking" = "expand";
+        "editor.cursorSmoothCaretAnimation" = "on";
+        "editor.wordWrap" = "on";
+      };
+    };
+
+    ghostty = {
+      enable = true;
+      enableBashIntegration = true;
+      settings = {
+        "background-opacity" = 0.8;
       };
     };
 

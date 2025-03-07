@@ -13,6 +13,7 @@
     ./HardwareOptions/bluetooth.nix
     ./HardwareOptions/coreConfig.nix
     ./HardwareOptions/file-cleanup.nix
+    ./HardwareOptions/nixLd.nix
     ./HardwareOptions/nvidia-graphics.nix
     ./HardwareOptions/power-management.nix
 
@@ -31,7 +32,6 @@
 
     # Environments
     ./Environments/Plasma6.nix
-    #./Environments/CosmicDesktop.nix COSMIC doesn't build, will enable when fixed.
     ./Environments/Xfce.nix
   ];
 
@@ -46,6 +46,7 @@
   docker.enable = lib.mkDefault false;
   home-assistant.enable = lib.mkDefault false;
   nextcloud-server.enable = lib.mkDefault false;
+  nixLd.enable = lib.mkDefault false;
   plex.enable = lib.mkDefault false;
   podman.enable = lib.mkDefault false;
   sunshine.enable = lib.mkDefault false;
@@ -55,6 +56,5 @@
   game-dev.enable = lib.mkDefault false;
 
   Plasma6.enable = lib.mkDefault false;
-#  CosmicDE.enable = lib.mkDefault false; COSMIC doesn't build, will enable when fixed.
   Xfce.enable = lib.mkDefault false;
 }

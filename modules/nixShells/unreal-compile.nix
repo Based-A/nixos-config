@@ -3,22 +3,40 @@
 }}:
 
 pkgs.mkShell {
-  nativeBuildInputs = with pkgs; [
-    pkg-config
-    autoPatchelfHook
-  ];
-
   packages = with pkgs; [
+    udev
     alsa-lib
+    mono
+    dotnet-sdk
+    stdenv
+    clang_18
+    icu
+    openssl
+    zlib
+    SDL2
+    SDL2.dev
+    SDL2 SDL2_image SDL2_ttf SDL2_mixer
+    vulkan-loader
+    vulkan-tools
+    vulkan-validation-layers
+    glib
+    glibc
+    libxkbcommon
+    nss
+    nspr
+    atk
+    mesa
+    dbus
+    pango
+    cairo
+    libpulseaudio
+    libGL
+    expat
+    libdrm
     freetype
     fontconfig
-    libGL
     libglvnd
-    libpulseaudio
-    libxkbcommon
-    mesa
     pipewire
-    vulkan-loader
     xorg.libX11
     xorg.libXScrnSaver
     xorg.libXcomposite
@@ -33,6 +51,8 @@ pkgs.mkShell {
     xorg.libxcb
     xorg.libxkbfile
     xorg.libxshmfence
+    xorg.libICE
+    xorg.libSM
     wayland
     wayland.dev
     wayland-scanner
@@ -40,22 +60,46 @@ pkgs.mkShell {
     egl-wayland
     libexecinfo
     eudev
-    python3
-    llvmPackages.libcxxClang
-    vscode
+    python311Full
+    embree2
+    autoPatchelfHook
+    toybox
   ];
 
   LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath (with pkgs; [
+    udev
     alsa-lib
+    mono
+    dotnet-sdk
+    stdenv
+    clang_18
+    icu
+    openssl
+    zlib
+    SDL2
+    SDL2.dev
+    SDL2 SDL2_image SDL2_ttf SDL2_mixer
+    vulkan-loader
+    vulkan-tools
+    vulkan-validation-layers
+    glib
+    glibc
+    libxkbcommon
+    nss
+    nspr
+    atk
+    mesa
+    dbus
+    pango
+    cairo
+    libpulseaudio
+    libGL
+    expat
+    libdrm
     freetype
     fontconfig
-    libGL
     libglvnd
-    libpulseaudio
-    libxkbcommon
-    mesa
     pipewire
-    vulkan-loader
     xorg.libX11
     xorg.libXScrnSaver
     xorg.libXcomposite
@@ -70,6 +114,8 @@ pkgs.mkShell {
     xorg.libxcb
     xorg.libxkbfile
     xorg.libxshmfence
+    xorg.libICE
+    xorg.libSM
     wayland
     wayland.dev
     wayland-scanner
@@ -77,9 +123,8 @@ pkgs.mkShell {
     egl-wayland
     libexecinfo
     eudev
-    python3
-    llvmPackages.libcxxClang
-    vscode
+    python311Full
+    embree2
   ]);
 
   shellHook = ''

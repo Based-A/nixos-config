@@ -17,11 +17,7 @@
 
   environment.systemPackages = with pkgs; [
     neovim
-    
-    # Git
     git
-    gh
-
     sops
   ];
   

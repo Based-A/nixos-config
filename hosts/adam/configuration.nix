@@ -19,6 +19,7 @@
   ## HardwareOptions
   bluetooth.enable = true;
   file-cleanup.enable = true;
+  nixLd.enable = false;
   nvidia-graphics.enable = true;
   power-management.enable = false;
 
@@ -39,23 +40,16 @@
 
   ## Desktop Environments
   Plasma6.enable = true;
-  #CosmicDE.enable = true; COSMIC doesn't build, will enable when fixed.
 
   #System Packages
   environment.systemPackages = with pkgs; [
     home-manager
-
     gpu-screen-recorder-gtk
     nvitop
 
     # Games
     #atlauncher
     itch
-
-    # Media
-    jellyfin
-    jellyfin-web
-    jellyfin-ffmpeg
   ];
 
   sops = {
@@ -94,6 +88,7 @@
   programs = {
     firefox.enable = true;
     steam.enable = true;
+    gamemode.enable = true;
   };
   
   # Services
@@ -153,6 +148,8 @@
     BROWSER = "app.zen_browser.zen";
     TERM = "ghostty";
   };
+
+  xdg.autostart.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

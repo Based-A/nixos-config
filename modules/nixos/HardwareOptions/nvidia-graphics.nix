@@ -31,9 +31,9 @@
 
       powerManagement.finegrained = false;
 
-      open = false;
-
       nvidiaSettings = true;
+
+      open = true;
 
       #package = config.boot.kernelPackages.nvidiaPackages.production;
       package = config.boot.kernelPackages.nvidiaPackages.latest;

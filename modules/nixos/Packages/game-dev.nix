@@ -17,7 +17,7 @@
       p4v
       p4
       p4d
-      jetbrains-toolbox
+      jetbrains.rider
     ];
   };
 }
