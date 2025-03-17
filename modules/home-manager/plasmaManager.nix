@@ -227,7 +227,7 @@
                     "applications:com.mitchellh.ghostty.desktop"
                     "applications:code.desktop"
                     "applications:obsidian.desktop"
-                    "applications:vesktop.desktop"
+                    "applications:discord.desktop"
                     "applications:steam.desktop"
                   ];
                 };

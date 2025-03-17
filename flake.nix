@@ -29,9 +29,6 @@
     blender-LTS = { #Static Blender versions
       url = "github:edolstra/nix-warez?dir=blender";
     };
-    ghostty = { #Super cool terminal emulator
-      url = "github:ghostty-org/ghostty";
-    };
 
     #Infrastructure
     disko = { #Declarative Disk Management
@@ -60,7 +57,6 @@
       stylix,
       plasma-manager,
       blender-LTS,
-      ghostty,
       disko,
       nixos-hardware,
       nix-ld,
@@ -158,6 +154,27 @@
               inputs.sops-nix.nixosModules.sops
               inputs.disko.nixosModules.disko
               inputs.nixos-hardware.nixosModules.raspberry-pi-4
+            ];
+          };
+        
+        # Home Server
+        ramiel = 
+          let 
+            host = "ramiel";
+            system = x86_64;
+          in
+          lib.nixosSystem {
+            inherit system;
+            specialArgs = {
+              inherit 
+                inputs
+                host;
+            };
+            modules = [
+              ./hosts/${host}/configuration.nix
+              ./modules/nixos
+              inputs.sops-nix.nixosModules.sops
+              inputs.disko.nixosModules.disko
             ];
           };
       };

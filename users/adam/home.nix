@@ -30,7 +30,6 @@
       brave
       thunderbird
       libreoffice
-      #inputs.ghostty.packages."${pkgs.system}".default
       ghostty
       (discord.override {
         withVencord = true;
@@ -46,7 +45,6 @@
       localsend
       fastfetch
       nushell
-      toybox
       btop
       sysz
       fzf
@@ -57,7 +55,7 @@
   };
 
   stylix = {
-    enable = false;
+    enable = true;
     autoEnable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-moon.yaml";
     image = ./../../hosts/adam/adamBackground.jpg;
@@ -66,6 +64,7 @@
     targets = {
       qt.enable = false;
       kde.enable = false;
+      vscode.enable = false;
     };
   };
   
@@ -75,46 +74,8 @@
       userName = "adam";
       userEmail = "adamlundrigan1@gmail.com";
       extraConfig = {
-
         init.defaultBranch = "main";
         safe.directory = "/home/flake";
-      };
-    };
-
-    vscode.profiles.default = {
-      enable = true;
-      enableExtensionUpdateCheck = true;
-      enableUpdateCheck = false;
-
-      extensions = with pkgs.vscode-extensions; [
-        jnoortheen.nix-ide
-        formulahendry.code-runner
-        johnpapa.vscode-peacock
-        ms-azuretools.vscode-docker
-        eamodio.gitlens
-        ms-vscode-remote.remote-ssh
-        pnp.polacode
-        pkief.material-icon-theme
-        tomoki1207.pdf
-        mechatroner.rainbow-csv
-        usernamehw.errorlens
-      ];
-
-      userSettings = lib.mkForce {
-        "[nix]"."serverPath" = "nixd";
-        "[nix]"."enableLanguageServer" = "true";
-        "[nix]"."serverSettings"."nixd"."nixpkgs"."expr" = "import <nixpkgs> { }";
-        "[nix]"."serverSettings"."nixd"."formatting"."command" = "[nixfmt]";
-        "[nix]"."serverSettings"."nixd"."options"."nixos"."expr" = "(builtins.getFlake \"/home/flake\").nixosConfigurations.adam.options";
-
-        "update.mode" = "none";
-        "workbench.colorTheme" = "Night Owl (No Italics)";
-        "explorer.confirmDragAndDrop" = false;
-        "editor.fontFamily" = "'Fira Code'";
-        "terminal.integrated.fontFamily" = "'Inconsolata'";
-        "editor.cursorBlinking" = "expand";
-        "editor.cursorSmoothCaretAnimation" = "on";
-        "editor.wordWrap" = "on";
       };
     };
 
@@ -122,7 +83,9 @@
       enable = true;
       enableBashIntegration = true;
       settings = {
-        "background-opacity" = 0.8;
+        "background-opacity" = 0.9;
+        "foreground" = "c8d3f5";
+        "font-family" = "Fira Code";
       };
     };
 

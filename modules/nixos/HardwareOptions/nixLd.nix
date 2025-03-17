@@ -15,16 +15,21 @@
       enable = true;
 
       libraries = with pkgs; [
-        udev
-        alsa-lib
-        mono
+        # UE5 Libs
+        ## Core
         dotnet-sdk
-        stdenv
+        mono
         clang_18
-        icu
+        llvmPackages_18.libcxxClang
+        stdenv
         openssl
-        openssl_3
-        openssl_legacy
+        glib
+        glibc
+        libgcc
+        ## Utilities
+        alsa-lib
+        icu
+        icu64
         zlib
         SDL2
         SDL2.dev
@@ -32,8 +37,6 @@
         vulkan-loader
         vulkan-tools
         vulkan-validation-layers
-        glib
-        glibc
         libxkbcommon
         nss
         nspr
@@ -72,9 +75,8 @@
         wayland-utils
         egl-wayland
         libexecinfo
-        eudev
-        python3
-        llvmPackages_20.libcxxClang
+        python311Full
+        openusd
       ];
     };
   };

@@ -19,7 +19,7 @@
   ## HardwareOptions
   bluetooth.enable = true;
   file-cleanup.enable = true;
-  nixLd.enable = false;
+  nixLd.enable = true;
   nvidia-graphics.enable = true;
   power-management.enable = false;
 
@@ -46,6 +46,8 @@
     home-manager
     gpu-screen-recorder-gtk
     nvitop
+    sourcegit
+    lmstudio
 
     # Games
     #atlauncher

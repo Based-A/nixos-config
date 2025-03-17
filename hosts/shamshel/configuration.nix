@@ -35,7 +35,6 @@
 
   ## Desktop Environments
   Plasma6.enable = false;
-  #CosmicDE.enable = false;
   Xfce.enable = true;
 
   #System Packages
