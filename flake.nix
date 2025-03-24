@@ -42,12 +42,14 @@
       url = "github:Mic92/nix-ld";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    lanzaboote = { #Secure Boot
-      url = "github:nix-community/lanzaboote/v0.4.2";
-      inputs.nixpkgs.follows = "nixpkgs";
+    deploy-rs = {
+      url = "github:serokell/deploy-rs";
     };
   };
-
+/* TODO:
+  Use Deploy-rs for Pi, Server
+  Look into Terraform/OpenTofu
+*/
   outputs =
     {
       self,
@@ -60,7 +62,7 @@
       disko,
       nixos-hardware,
       nix-ld,
-      lanzaboote,
+      deploy-rs,
       ...
     }@inputs:
 
@@ -70,6 +72,7 @@
       lib = nixpkgs.lib;
     in
     {
+      # Host Machines
       nixosConfigurations = {
         # Main Workstation
         adam =
@@ -82,6 +85,7 @@
             specialArgs = {
               inherit
                 inputs
+                lib
                 host
                 ;
             };
@@ -103,6 +107,7 @@
             specialArgs = {
               inherit
                 inputs
+                lib
                 host
                 ;
             };
@@ -178,7 +183,7 @@
             ];
           };
       };
-
+      # Home-manager Profiles
       homeConfigurations = {
         Adam = 
           let
@@ -229,5 +234,28 @@
             ];
           };
       };
+      # Deploy-rs
+      deploy = {
+        nodes = {
+          lilith.profiles.system = {
+            user = "root";
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.lilith;
+          };
+          sachiel.profiles.system = {
+            user = "root";
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.sachiel;
+          };
+          shamshel.profiles.system = {
+            user = "root";
+            path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.shamshel;
+          };
+          ramiel.profiles.system = {
+            user = "root";
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.ramiel;
+          };
+        };
+      };
+
+      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
     };
 }

@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  host,
   ...
 }:
 
@@ -12,30 +13,18 @@
     ./hardware-configuration.nix
     ./../../modules/nixos
     inputs.sops-nix.nixosModules.sops
-    ./../../diskoConfs/macOSVM-disk-config.nix
+    ./${host}-disko-config.nix
   ];
 
   # Modules
 
   ## HardwareOptions
-  bluetooth.enable = false;
   file-cleanup.enable = true;
-  nvidia-graphics.enable = false;
-  power-management.enable = false;
-
-  ## Services
-  docker.enable = false;
-  home-assistant.enable = false;
-  plex.enable = false;
-  podman.enable = false;
-  sunshine.enable = false;
 
   ## Other
   shellAliases.enable = true;
 
   ## Desktop Environments
-  Plasma6.enable = false;
-  #CosmicDE.enable = true;
   Xfce.enable = true;
 
   #System Packages
@@ -57,12 +46,18 @@
     };
   };
 
-  users.users = {
-    macOS = {
-      isNormalUser = true;
-      description = "macOS VM";
-      uid = 1002;
-      extraGroups = [ "wheel" ];
+  users ={
+    users = {
+      macOS = {
+        isNormalUser = true;
+        description = "macOS VM";
+        group = "macOS";
+        uid = 1002;
+        extraGroups = [ "wheel" ];
+      };
+    };
+    groups = {
+      macOS = {};
     };
   };
 

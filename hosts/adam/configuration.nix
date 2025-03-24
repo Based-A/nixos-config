@@ -1,7 +1,9 @@
 {
   config,
   pkgs,
+  lib,
   inputs,
+  host,
   ...
 }:
 
@@ -21,12 +23,8 @@
   file-cleanup.enable = true;
   nixLd.enable = true;
   nvidia-graphics.enable = true;
-  power-management.enable = false;
 
   ## Services
-  docker.enable = false;
-  home-assistant.enable = false;
-  plex.enable = false;
   podman.enable = true;
   sunshine.enable = true;
 
@@ -36,7 +34,6 @@
   ## Packages
   audio-apps.enable = true;
   digital-art.enable = true;
-  game-dev.enable = true;
 
   ## Desktop Environments
   Plasma6.enable = true;
@@ -48,6 +45,7 @@
     nvitop
     sourcegit
     lmstudio
+    sbctl
 
     # Games
     #atlauncher
@@ -59,38 +57,38 @@
     defaultSopsFormat = "json";
 
     age.keyFile = "/nix/persist/sops/age/keys.txt";
-
-    secrets.adam_ssh_key = {
-      path = "/home/adam/.ssh/id_ed25519";
-      owner = config.users.users.adam.name;
-    };
-
-    secrets.nextcloudPassword = {
-    };
   };
 
-  users.users = {
-    adam = {
-      isNormalUser = true;
-      description = "adam";
-      uid = 1000;
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-      ];
+  users = {
+    users = {
+      adam = {
+        isNormalUser = true;
+        description = "adam";
+        uid = 1000;
+        group = "adam";
+        extraGroups = [
+          "networkmanager"
+          "wheel"
+        ];
+      };
+      guest = {
+        isNormalUser = true;
+        description = "guest profile";
+        group = "guest";
+        uid = 1001;
+      };
     };
-    guest = {
-      isNormalUser = true;
-      description = "guest profile";
-      uid = 1001;
+    groups = {
+      adam = {};
+      guest = {};
     };
   };
-
   # Programs
   programs = {
     firefox.enable = true;
     steam.enable = true;
     gamemode.enable = true;
+    noisetorch.enable = true;
   };
   
   # Services
@@ -99,6 +97,7 @@
     flatpak.enable = true;
     pipewire = {
       enable = true;
+      audio.enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;

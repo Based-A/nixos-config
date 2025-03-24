@@ -2,6 +2,7 @@
   config,
   pkgs,
   inputs,
+  host,
   ...
 }:
 
@@ -19,15 +20,10 @@
   ## HardwareOptions
   bluetooth.enable = true;
   file-cleanup.enable = true;
-  nvidia-graphics.enable = false;
   power-management.enable = false;
 
   ## Services
-  docker.enable = false;
-  home-assistant.enable = false;
-  plex.enable = false;
   podman.enable = true;
-  sunshine.enable = false;
 
   ## Other
   shellAliases.enable = true;
@@ -56,20 +52,28 @@
     };
   };
 
-  users.users = {
-    adam = {
-      isNormalUser = true;
-      description = "adam";
-      uid = 1000;
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-      ];
+  users = {
+    users = {
+      adam = {
+        isNormalUser = true;
+        description = "adam";
+        uid = 1000;
+        group = "adam";
+        extraGroups = [
+          "networkmanager"
+          "wheel"
+        ];
+      };
+      guest = {
+        isNormalUser = true;
+        description = "guest profile";
+        group = "guest";
+        uid = 1001;
+      };
     };
-    guest = {
-      isNormalUser = true;
-      description = "guest profile";
-      uid = 1001;
+    groups = {
+      adam = {};
+      guest = {};
     };
   };
 
