@@ -64,6 +64,11 @@
           "wheel"
         ];
       };
+      root = {
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEVI2t6BAIW6rjeSmsdEWxoJO7vyjYk+Gw5RsUGJAfhc adam@adam-nixos"
+        ];
+      };
       guest = {
         isNormalUser = true;
         description = "guest profile";

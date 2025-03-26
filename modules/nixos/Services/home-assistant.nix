@@ -13,6 +13,8 @@
   config = lib.mkIf config.home-assistant.enable {
     services.home-assistant = {
       enable = true;
+      config = null;
+      configDir = "/etc/home-assistant";
     };
   };
 }

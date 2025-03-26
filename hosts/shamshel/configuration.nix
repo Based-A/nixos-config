@@ -2,39 +2,42 @@
   config,
   pkgs,
   inputs,
+  host,
   ...
 }:
 
 {
+  #Raspberry Pi4
   imports = [
     # Include the results of the hardware scan.
     #./hardware-configuration.nix
     ./../../modules/nixos
-    ./../../diskoConfs/nixPi4-disk-config.nix
     inputs.sops-nix.nixosModules.sops
+    ./${host}-disko-config.nix
   ];
-
+/* TODO:
+  Homepage - Dashboard
+  Home Assistant - Automation
+  Garage - Obsidian Vault
+  Grocy - Shopping List
+  Arr Apps - Media Server
+  Jellyfin - Media Server
+  
+*/ 
   # Modules
 
   ## HardwareOptions
   bluetooth.enable = true;
   file-cleanup.enable = true;
-  nvidia-graphics.enable = false;
-  power-management.enable = false;
 
   ## Services
-  docker.enable = false;
   home-assistant.enable = true;
-  #nextcloud-server.enable = true;
-  plex.enable = false;
   podman.enable = true;
-  sunshine.enable = false;
 
   ## Other
   shellAliases.enable = true;
 
   ## Desktop Environments
-  Plasma6.enable = false;
   Xfce.enable = true;
 
   #System Packages
@@ -42,13 +45,24 @@
     libraspberrypi
   ];
 
-  users.users = {
-    nixPi = {
-      isNormalUser = true;
-      description = "nixPi";
-      uid = 1003;
-      group = "nixPi";
-      extraGroups = [ "wheel" ];
+  users = {
+    users = {
+      nixPi = {
+        isNormalUser = true;
+        description = "nixPi";
+        uid = 1003;
+        group = "nixPi";
+        extraGroups = [ "wheel" ];
+      };
+      adam.isNormalUser = true;
+      root = {
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEVI2t6BAIW6rjeSmsdEWxoJO7vyjYk+Gw5RsUGJAfhc adam@adam-nixos"
+        ];
+      };
+    };
+    groups = {
+      nixPi = {};
     };
   };
 
@@ -58,9 +72,6 @@
   boot = {
     loader = {
       timeout = 5;
-      raspberryPi.firmwareConfig = ''
-        dtparam=audio=on
-      '';
     };
     kernelPackages = pkgs.linuxPackages_latest;
     kernelParams = [
@@ -77,6 +88,29 @@
     serviceConfig = {
       ExecStart = "${pkgs.bluez}/bin/btattach -B /dev/ttyAMA0 -P bcm -S 3000000";
     };
+  };
+
+  services = {
+    openssh = {
+      enable = true;
+      knownHosts = {
+        adam-nixos = {
+          publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEVI2t6BAIW6rjeSmsdEWxoJO7vyjYk+Gw5RsUGJAfhc";
+          hostNames = [ 
+            "adam@adam-nixos" 
+            "192.168.50.143"
+          ];
+        };
+      };
+      settings.PermitRootLogin = "yes";
+    };
+  };
+
+  programs.git.config = {
+    init.defaultBranch = "main";
+    safe.directory = "/home/flake";
+    user.name = "adam-nixPi4";
+    user.email = "adamlundrigan1@gmail.com";
   };
 
   # Networking Options

@@ -55,16 +55,16 @@
         uid = 1002;
         extraGroups = [ "wheel" ];
       };
+      root = {
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEVI2t6BAIW6rjeSmsdEWxoJO7vyjYk+Gw5RsUGJAfhc adam@adam-nixos"
+        ];
+      };
     };
     groups = {
       macOS = {};
     };
   };
-
-  #Accepted Remote SSH Keys
-  users.users.root.openssh.authorizedKeys.keys = [
-    "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEVI2t6BAIW6rjeSmsdEWxoJO7vyjYk+Gw5RsUGJAfhc adam@adam-nixos"
-  ];
 
 #nix run github:nix-community/nixos-anywhere -- --flake ./home/flake#sachiel --generate-hardware-config nixos-generate-config ./hosts/sachiel/hardware-configuration.nix root@192.168.50.248
   #Git Config
