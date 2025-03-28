@@ -27,6 +27,7 @@
   ## Services
   podman.enable = true;
   sunshine.enable = true;
+  nextcloud-server.enable = true;
 
   ## Other
   shellAliases.enable = true;
