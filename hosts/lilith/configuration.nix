@@ -50,9 +50,6 @@
     #  path = "/home/adam/.ssh/id_ed25519";
     #  owner = config.users.users.adam.name;
     #};
-
-    secrets.nextcloudPassword = {
-    };
   };
 
   users = {
@@ -103,6 +100,17 @@
       jack.enable = true;
     };
     printing.enable = true;
+    xserver = {
+      videoDrivers = [ "intel" ];
+    };
+  };
+
+  # Hardware
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-compute-runtime-legacy1
+    ];
   };
 
   # Boot Options
