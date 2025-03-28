@@ -9,6 +9,7 @@ pkgs.mkShell rec {
     mono
     dotnet-sdk
     stdenv
+    stdenv.cc.cc.lib
     clang_18
     icu
     openssl

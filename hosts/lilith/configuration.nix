@@ -31,6 +31,9 @@
   ## Desktop Environments
   Plasma6.enable = true;
 
+  ## Packages
+  digital-art.enable = true;
+
   environment.systemPackages = with pkgs; [
     home-manager
     moonlight-qt
