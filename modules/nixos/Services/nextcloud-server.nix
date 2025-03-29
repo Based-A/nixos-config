@@ -3,6 +3,7 @@
   lib,
   config,
   inputs,
+  host,
   ...
 }:
 {
@@ -16,14 +17,27 @@
       hostName = "localhost";
       config = {
         dbtype = "sqlite";
-        adminpassFile = "/etc/nextcloud-admin-pass";
+        adminpassFile = "/home/${host}/.config/nextcloud.txt";
+        adminuser = "root";
       };
-      
+      settings = {
+        trusted_domains = [
+          "192.168.50.143"
+        ];
+      };
+      #secretFile = "/home/${host}/.config/nextcloud.txt";
     };
 
     networking.firewall.allowedTCPPorts = [ 80 443 ];
 
-    environment.etc."nextcloud-admin-pass".text = "adminPass!";
+    /*users = {
+      users.nextcloud = {
+        name = "nextcloud";
+        uid = 2001;
+        group = "nextcloud";
+      };
+      groups.nextcloud = {};
+    };*/
 
     #Reference: https://wiki.nixos.org/w/index.php?title=Nextcloud
   };

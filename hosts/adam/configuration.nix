@@ -56,8 +56,19 @@
   sops = {
     defaultSopsFile = ./../../modules/secrets/secrets.json;
     defaultSopsFormat = "json";
-
     age.keyFile = "/nix/persist/sops/age/keys.txt";
+    secrets = {
+      nextcloudServerPassword = {
+        sopsFile = ./../../modules/secrets/secrets.json;
+        format = "json";
+        owner = config.users.users.nextcloud.name;
+        key = "nextcloudServerPassword";
+        restartUnits = [
+          "nextcloud-setup.service"
+        ];
+        path = "/home/${host}/.config/nextcloud.txt";
+      };
+    };
   };
 
   users = {
