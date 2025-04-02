@@ -21,7 +21,6 @@
 
     packages = with pkgs; [
       #VS Code
-      vscode
       nixfmt-rfc-style
       nixd
 
@@ -80,9 +79,40 @@
       enable = true;
       enableBashIntegration = true;
       settings = {
-        "background-opacity" = 0.9;
-        "foreground" = "c8d3f5";
         "font-family" = "Fira Code";
+      };
+    };
+    vscode = {
+      enable = true;
+      package = pkgs.vscode.fhs;
+      profiles.default = {
+        enableExtensionUpdateCheck = true;
+        enableUpdateCheck = false;
+        userSettings = lib.mkForce {
+          "[nix]"."serverPath" = "nixd";
+          "[nix]"."enableLanguageServer" = "true";
+          "[nix]"."serverSettings"."nixd"."nixpkgs"."expr" = "import <nixpkgs> { }";
+          "[nix]"."serverSettings"."nixd"."formatting"."command" = "[nixfmt]";
+          "explorer.confirmDragAndDrop" = false;
+          "editor.fontFamily" = "'Fira Code'";
+          "terminal.integrated.fontFamily" = "'Inconsolata'";
+          "editor.cursorBlinking" = "expand";
+          "editor.cursorSmoothCaretAnimation" = "on";
+          "editor.wordWrap" = "on";
+        };
+        extensions = with pkgs.vscode-extensions; [
+          continue.continue
+          fill-labs.dependi
+          formulahendry.code-runner
+          gruntfuggly.todo-tree
+          jnoortheen.nix-ide
+          johnpapa.vscode-peacock
+          pkief.material-icon-theme
+          rust-lang.rust-analyzer
+          tamasfe.even-better-toml
+          usernamehw.errorlens
+          vadimcn.vscode-lldb
+        ];
       };
     };
     # Let Home Manager install and manage itself.
