@@ -18,27 +18,21 @@
       config = {
         dbtype = "sqlite";
         adminpassFile = "/home/${host}/.config/nextcloud.txt";
-        adminuser = "root";
+        adminuser = "Adam L";
       };
       settings = {
         trusted_domains = [
           "192.168.50.143"
         ];
       };
-      #secretFile = "/home/${host}/.config/nextcloud.txt";
     };
 
     networking.firewall.allowedTCPPorts = [ 80 443 ];
 
-    /*users = {
-      users.nextcloud = {
-        name = "nextcloud";
-        uid = 2001;
-        group = "nextcloud";
-      };
-      groups.nextcloud = {};
-    };*/
-
+    /* TODO:
+    Figure out S3 integration.
+    See if there's any other nextcloud apps that I want to install.
+    */
     #Reference: https://wiki.nixos.org/w/index.php?title=Nextcloud
   };
 }

@@ -46,7 +46,6 @@
       fastfetch
       nushell
       btop
-      sysz
       fzf
 
       #stylix
@@ -57,15 +56,14 @@
   stylix = {
     enable = true;
     autoEnable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-moon.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-storm.yaml";
     image = ./../../hosts/adam/adamBackground.jpg;
     imageScalingMode = "fill";
     polarity = "dark";
-    targets = {
+    /*targets = {
       qt.enable = false;
       kde.enable = false;
-      vscode.enable = false;
-    };
+    };*/
   };
   
   programs = {
@@ -78,7 +76,6 @@
         safe.directory = "/home/flake";
       };
     };
-
     ghostty = {
       enable = true;
       enableBashIntegration = true;
@@ -88,7 +85,6 @@
         "font-family" = "Fira Code";
       };
     };
-
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
   };

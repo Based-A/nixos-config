@@ -16,4 +16,10 @@
       enable = true;
     };
   };
+  /* TODO:
+    Garage Vs Minio
+    Setup Nginx proxy
+    Setup Garage/Minio S3 Service
+    Link in Obsidian Vault
+    */
 }

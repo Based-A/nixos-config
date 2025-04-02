@@ -27,8 +27,7 @@
 
         (google-fonts.override {
           fonts = [
-            "Inconsolata"
-            "Hanken Grotesk"
+            "Urbanist"
             "Besley"
             "Fira Code"
           ];
@@ -72,27 +71,27 @@
 
         fonts = {
           fixedWidth = {
-            family = "Inconsolata";
+            family = "Fira Code";
             pointSize = 12;
           };
           general = {
-            family = "Hanken Grotesk";
+            family = "Urbanist";
             pointSize = 12;
           };
           menu = {
-            family = "Hanken Grotesk";
+            family = "Urbanist";
             pointSize = 12;
           };
           small = {
-            family = "Hanken Grotesk";
+            family = "Urbanist";
             pointSize = 8;
           };
           toolbar = {
-            family = "Hanken Grotesk";
+            family = "Urbanist";
             pointSize = 12;
           };
           windowTitle = {
-            family = "Hanken Grotesk";
+            family = "Urbanist";
             pointSize = 10;
           };
         };
@@ -399,10 +398,10 @@
       enable = true;
       defaultFonts = {
         monospace = [
-          "Inconsolata"
+          "Fira Code"
         ];
         sansSerif = [
-          "Hanken Grotesk"
+          "Urbanist"
         ];
         serif = [
           "Besley"

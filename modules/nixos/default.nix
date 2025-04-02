@@ -13,7 +13,6 @@
     ./HardwareOptions/bluetooth.nix
     ./HardwareOptions/coreConfig.nix
     ./HardwareOptions/file-cleanup.nix
-    ./HardwareOptions/nixLd.nix
     ./HardwareOptions/nvidia-graphics.nix
     ./HardwareOptions/power-management.nix
 
@@ -30,6 +29,9 @@
     # Environments
     ./Environments/Plasma6.nix
     ./Environments/Xfce.nix
+
+    # Containers
+    ./containers/resolve_db_container.nix
   ];
 
   # Module Defaults
@@ -42,7 +44,6 @@
 
   home-assistant.enable = lib.mkDefault false;
   nextcloud-server.enable = lib.mkDefault false;
-  nixLd.enable = lib.mkDefault false;
   podman.enable = lib.mkDefault false;
   sunshine.enable = lib.mkDefault false;
 
@@ -51,4 +52,6 @@
 
   Plasma6.enable = lib.mkDefault false;
   Xfce.enable = lib.mkDefault false;
+
+  resolve_db.enable = lib.mkDefault false;
 }

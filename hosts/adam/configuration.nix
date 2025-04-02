@@ -21,7 +21,6 @@
   ## HardwareOptions
   bluetooth.enable = true;
   file-cleanup.enable = true;
-  nixLd.enable = true;
   nvidia-graphics.enable = true;
 
   ## Services
@@ -39,18 +38,25 @@
   ## Desktop Environments
   Plasma6.enable = true;
 
+  ## Containers
+  #resolve_db.enable = true;
+
   #System Packages
   environment.systemPackages = with pkgs; [
     home-manager
     gpu-screen-recorder-gtk
     nvitop
     sourcegit
-    lmstudio
-    sbctl
+    (ollama.override { 
+      acceleration = "cuda";
+    })
+    
 
     # Games
     #atlauncher
     itch
+  ]++[
+    inputs.nix-alien.packages.x86_64-linux.nix-alien
   ];
 
   sops = {
@@ -101,6 +107,7 @@
     steam.enable = true;
     gamemode.enable = true;
     noisetorch.enable = true;
+    nix-ld.enable = true;
   };
   
   # Services

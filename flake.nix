@@ -38,8 +38,8 @@
     nixos-hardware = { #Pi4 Hardware Options
       url = "github:NixOS/nixos-hardware/master";
     };
-    nix-ld = { #Run unpatched dynamically linked binaries
-      url = "github:Mic92/nix-ld";
+    nix-alien = { #Run unpatched dynamically linked binaries
+      url = "github:thiagokokada/nix-alien";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     deploy-rs = {
@@ -47,8 +47,16 @@
     };
   };
 /* TODO:
+  Add Services:
+    nix-alien (to replace/compliment nix-ld)
+    Nextcloud S3 storage
+    Homepage Server Dashboard
+    Grocy Service
+    ARR Stack
+  Add Components:
+    nix-on-droid configuration
+  Fix Pi Host
   Use Deploy-rs for Pi, Server
-  Look into Terraform/OpenTofu
 */
   outputs =
     {
@@ -61,7 +69,7 @@
       blender-LTS,
       disko,
       nixos-hardware,
-      nix-ld,
+      nix-alien,
       deploy-rs,
       ...
     }@inputs:
@@ -72,7 +80,7 @@
       lib = nixpkgs.lib;
     in
     {
-      # Host Machines
+      # NixOS Host Machines
       nixosConfigurations = {
         # Main Workstation
         adam =
