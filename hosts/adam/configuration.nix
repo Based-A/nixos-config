@@ -43,18 +43,11 @@
 
   #System Packages
   environment.systemPackages = with pkgs; [
-    home-manager
-    gpu-screen-recorder-gtk
-    nvitop
-    sourcegit
-    (ollama.override { 
-      acceleration = "cuda";
-    })
-    
-
-    # Games
-    #atlauncher
-    itch
+    home-manager #dotfile manager
+    gpu-screen-recorder-gtk #gpu screen recorder
+    nvitop #gpu monitoring
+    sourcegit #gui git client
+    itch #game store
   ]++[
     inputs.nix-alien.packages.x86_64-linux.nix-alien
   ];
@@ -123,6 +116,10 @@
       jack.enable = true;
     };
     printing.enable = true;
+    ollama = {
+      enable = true;
+      acceleration = "cuda";
+    };
   };
 
   # Boot Options

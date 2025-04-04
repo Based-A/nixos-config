@@ -48,7 +48,6 @@
   };
 /* TODO:
   Add Services:
-    nix-alien (to replace/compliment nix-ld)
     Nextcloud S3 storage
     Homepage Server Dashboard
     Grocy Service

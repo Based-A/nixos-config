@@ -353,14 +353,10 @@
 
         workspace = {
           clickItemTo = "select";
-          colorScheme = "BreezeDark";
           cursor.theme = "Win10OS-cursors";
           iconTheme = "Papirus-Dark";
           splashScreen.theme = "Breeze";
-          theme = "Gently";
           wallpaper = "/home/flake/hosts/adam/adamBackground.jpg";
-          windowDecorations.library = "org.kde.kwin.aurorae";
-          windowDecorations.theme = "__aurorae__svg__WillowDarkBlur";
         };
       };
 

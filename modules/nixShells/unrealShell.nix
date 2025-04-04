@@ -1,7 +1,7 @@
 {pkgs ? import <nixpkgs> {
   config.allowUnfree = true;
 }}:
-
+# nix-alien-ld -p udev -p alsa-lib -p mono -p dotnet-sdk -p stdenv -p stdenv.cc.cc.lib -p clang_18 -p icu -p openssl -p zlib -p SDL2 -p SDL2.dev -p SDL2 -p SDL2_image -p SDL2_ttf -p SDL2_mixer -p vulkan-loader -p vulkan-tools -p vulkan-validation-layers -p glib -p glibc -p libgcc -p libxkbcommon -p nss -p nspr -p atk -p mesa -p dbus -p pango -p cairo -p libpulseaudio -p libGL -p expat -p libdrm -p freetype -p fontconfig -p libglvnd -p pipewire -p wayland -p wayland.dev -p wayland-scanner -p wayland-utils -p egl-wayland -p libexecinfo -p eudev -p python311Full -p embree2 -p openusd -p xorg.libX11 -p xorg.libXScrnSaver -p xorg.libXcomposite -p xorg.libXcursor -p xorg.libXdamage -p xorg.libXext -p xorg.libXfixes -p xorg.libXi -p xorg.libXrandr -p xorg.libXrender -p xorg.libXtst -p xorg.libxcb -p xorg.libxkbfile -p xorg.libxshmfence -p xorg.libICE -p xorg.libSM Engine/Binaries/Linux/UnrealEditor
 pkgs.mkShell rec {
   buildInputs = with pkgs; [
     udev

@@ -59,10 +59,6 @@
     image = ./../../hosts/adam/adamBackground.jpg;
     imageScalingMode = "fill";
     polarity = "dark";
-    /*targets = {
-      qt.enable = false;
-      kde.enable = false;
-    };*/
   };
   
   programs = {
