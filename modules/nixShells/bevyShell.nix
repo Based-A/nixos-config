@@ -1,14 +1,14 @@
 {
   pkgs ? import <nixpkgs> { },
 }:
-mkShell rec {
-  nativeBuildInputs = [
+pkgs.mkShell rec {
+  nativeBuildInputs = with pkgs; [
     cargo
     rustc
     rustPlatform.bindgenHook
     pkg-config
   ];
-  buildInputs = [
+  buildInputs = with pkgs; [
     udev
     alsa-lib
     vulkan-loader
@@ -19,4 +19,5 @@ mkShell rec {
     libxkbcommon
     wayland
   ];
+  LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath buildInputs;
 }
