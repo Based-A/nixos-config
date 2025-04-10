@@ -20,7 +20,7 @@
     stateVersion = "24.05"; # Please read the comment before changing.
 
     packages = with pkgs; [
-      #VS Code
+      vscode
       nixfmt-rfc-style
       nixd
 
@@ -80,7 +80,7 @@
     };
     vscode = {
       enable = true;
-      package = pkgs.vscode.fhs;
+      package = pkgs.vscode;
       profiles.default = {
         enableExtensionUpdateCheck = true;
         enableUpdateCheck = false;
@@ -95,6 +95,7 @@
           "editor.cursorBlinking" = "expand";
           "editor.cursorSmoothCaretAnimation" = "on";
           "editor.wordWrap" = "on";
+          "rust-analyzer.cargo.extraEnv"."RUSTFLAGS" = "-Clinker=clang -Clink-arg=-fuse-ld=mold";
         };
         extensions = with pkgs.vscode-extensions; [
           continue.continue

@@ -119,6 +119,12 @@
     ollama = {
       enable = true;
       acceleration = "cuda";
+      loadModels = [
+        "deepseek-r1:8b"
+        "llama3.1:8b"
+        "nomic-embed-text:latest"
+        "qwen2.5-coder:1.5b-base"
+      ];
     };
   };
 

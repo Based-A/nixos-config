@@ -18,6 +18,9 @@ pkgs.mkShell rec {
     xorg.libXrandr
     libxkbcommon
     wayland
+    clang_20
+    mold
   ];
   LD_LIBRARY_PATH = pkgs.lib.makeLibraryPath buildInputs;
+  MOLD_LINKER = pkgs.mold;
 }
