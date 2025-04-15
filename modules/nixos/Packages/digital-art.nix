@@ -18,7 +18,8 @@
       krita
       inkscape-with-extensions
       inputs.blender-LTS.packages.${pkgs.system}.blender_3_6
-      davinci-resolve
+      #davinci-resolve
+      opentabletdriver # tablet drivers
     ];
   };
 }

@@ -98,7 +98,6 @@
           "rust-analyzer.cargo.extraEnv"."RUSTFLAGS" = "-Clinker=clang -Clink-arg=-fuse-ld=mold";
         };
         extensions = with pkgs.vscode-extensions; [
-          continue.continue
           fill-labs.dependi
           formulahendry.code-runner
           gruntfuggly.todo-tree

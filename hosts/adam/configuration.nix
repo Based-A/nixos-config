@@ -48,6 +48,11 @@
     nvitop #gpu monitoring
     sourcegit #gui git client
     itch #game store
+    # Rust Dev
+    cargo
+    rustc
+    rustPlatform.bindgenHook
+    pkg-config
   ]++[
     inputs.nix-alien.packages.x86_64-linux.nix-alien
   ];
@@ -116,6 +121,11 @@
       jack.enable = true;
     };
     printing.enable = true;
+    avahi = {
+      enable = true;
+      nssmdns4 = true;
+      openFirewall = true;
+    };
     ollama = {
       enable = true;
       acceleration = "cuda";
