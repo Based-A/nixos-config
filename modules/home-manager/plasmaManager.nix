@@ -172,7 +172,7 @@
           nightLight = {
             enable = true;
             mode = "times";
-            time.evening = "20:00";
+            time.evening = "22:00";
             time.morning = "08:00";
             transitionTime = 30;
           };
@@ -356,7 +356,7 @@
           cursor.theme = "Win10OS-cursors";
           iconTheme = "Papirus-Dark";
           splashScreen.theme = "Breeze";
-          wallpaper = "/home/flake/hosts/adam/adamBackground.jpg";
+          wallpaper = "/home/flake/hosts/bebopBackground.png";
         };
       };
 

@@ -56,7 +56,7 @@
     enable = true;
     autoEnable = true;
     base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-storm.yaml";
-    image = ./../../hosts/adam/adamBackground.jpg;
+    image = ./../../hosts/bebopBackground.png;
     imageScalingMode = "fill";
     polarity = "dark";
   };

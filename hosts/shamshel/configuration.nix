@@ -18,10 +18,8 @@
 /* TODO:
   Homepage - Dashboard
   Home Assistant - Automation
-  Garage - Obsidian Vault
   Grocy - Shopping List
   Arr Apps - Media Server
-  Jellyfin - Media Server
   
 */ 
   # Modules
@@ -37,12 +35,9 @@
   ## Other
   shellAliases.enable = true;
 
-  ## Desktop Environments
-  Xfce.enable = true;
-
   #System Packages
   environment.systemPackages = with pkgs; [
-    libraspberrypi
+    #libraspberrypi
   ];
 
   users = {
@@ -66,10 +61,17 @@
     };
   };
 
-  users.groups.nixPi = {};
+  # nixos-raspberrypi options
+  system.nixos.tags = let
+    cfg = config.boot.loader.raspberryPi;
+  in [
+    "raspberry-pi-${cfg.variant}"
+    cfg.bootloader
+    config.boot.kernelPackages.kernel.version
+  ];
 
   # Boot Options
-  boot = {
+  /*boot = {
     loader = {
       timeout = 5;
     };
@@ -78,9 +80,9 @@
       "snd_bcm2835.enable_hdmi=1"
       "snd_bcm2835.enable_headphones=1"
     ];
-  };
+  };*/
 
-  #Bluetooth on Pi4
+  /*#Bluetooth on Pi4
   systemd.services.btattach = {
     before = [ "bluetooth.service" ];
     after = [ "dev-ttyAMA0.device" ];
@@ -88,7 +90,7 @@
     serviceConfig = {
       ExecStart = "${pkgs.bluez}/bin/btattach -B /dev/ttyAMA0 -P bcm -S 3000000";
     };
-  };
+  }; */
 
   services = {
     openssh = {

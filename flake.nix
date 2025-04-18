@@ -29,17 +29,14 @@
     blender-LTS = { #Static Blender versions
       url = "github:edolstra/nix-warez?dir=blender";
     };
+    nix-alien = { #Run unpatched dynamically linked binaries
+      url = "github:thiagokokada/nix-alien";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     #Infrastructure
     disko = { #Declarative Disk Management
       url = "github:nix-community/disko";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixos-hardware = { #Pi4 Hardware Options
-      url = "github:NixOS/nixos-hardware/master";
-    };
-    nix-alien = { #Run unpatched dynamically linked binaries
-      url = "github:thiagokokada/nix-alien";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     deploy-rs = {
@@ -47,222 +44,196 @@
     };
   };
 /* TODO:
-  Add Services:
-    Nextcloud S3 storage
-    Homepage Server Dashboard
-    Grocy Service
-    ARR Stack
   Add Components:
     nix-on-droid configuration
-  Fix Pi Host
-  Use Deploy-rs for Pi, Server
 */
-  outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      sops-nix,
-      stylix,
-      plasma-manager,
-      blender-LTS,
-      disko,
-      nixos-hardware,
-      nix-alien,
-      deploy-rs,
-      ...
-    }@inputs:
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    sops-nix,
+    stylix,
+    plasma-manager,
+    blender-LTS,
+    disko,
+    nix-alien,
+    deploy-rs,
+    ...
+  }@inputs:
 
-    let
-      x86_64 = "x86_64-linux";
-      aarch64 = "aarch64-linux";
-      lib = nixpkgs.lib;
-    in
-    {
-      # NixOS Host Machines
-      nixosConfigurations = {
-        # Main Workstation
-        adam =
-          let
-            host = "adam";
-            system = x86_64;
-          in
-          lib.nixosSystem {
-            inherit system;
-            specialArgs = {
-              inherit
-                inputs
-                lib
-                host
-                ;
-            };
-            modules = [
-              ./hosts/${host}/configuration.nix
-              ./modules/nixos
-              inputs.sops-nix.nixosModules.sops
-            ];
+  let
+    x86_64 = "x86_64-linux";
+    aarch64 = "aarch64-linux";
+    lib = nixpkgs.lib;
+  in
+  {
+    # NixOS Host Machines
+    nixosConfigurations = {
+      # Main Workstation
+      adam =
+        let
+          host = "adam";
+          system = x86_64;
+        in
+        lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit
+              inputs
+              lib
+              host
+              ;
           };
+          modules = [
+            ./hosts/${host}/configuration.nix
+            ./modules/nixos
+            inputs.sops-nix.nixosModules.sops
+          ];
+        };
 
-        # Laptop
-        lilith =
-          let
-            host = "lilith";
-            system = x86_64;
-          in
-          lib.nixosSystem {
-            inherit system;
-            specialArgs = {
-              inherit
-                inputs
-                lib
-                host
-                ;
-            };
-            modules = [
-              ./hosts/${host}/configuration.nix
-              ./modules/nixos
-              inputs.sops-nix.nixosModules.sops
-            ];
+      # Laptop
+      lilith =
+        let
+          host = "lilith";
+          system = x86_64;
+        in
+        lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit
+              inputs
+              lib
+              host
+              ;
           };
+          modules = [
+            ./hosts/${host}/configuration.nix
+            ./modules/nixos
+            inputs.sops-nix.nixosModules.sops
+          ];
+        };
 
-        # macOS VM
-        sachiel =
-          let
-            host = "sachiel";
-            system = x86_64;
-          in
-          lib.nixosSystem {
-            inherit system;
-            specialArgs = {
-              inherit
-                inputs
-                host
-                ;
-            };
-            modules = [
-              ./hosts/${host}/configuration.nix
-              ./modules/nixos
-              inputs.sops-nix.nixosModules.sops
-              inputs.disko.nixosModules.disko
-            ];
+      # macOS VM
+      sachiel =
+        let
+          host = "sachiel";
+          system = x86_64;
+        in
+        lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit
+              inputs
+              host
+              ;
           };
+          modules = [
+            ./hosts/${host}/configuration.nix
+            ./modules/nixos
+            inputs.sops-nix.nixosModules.sops
+            inputs.disko.nixosModules.disko
+          ];
+        };
 
-        # Home Assistant PC
-        shamshel =
-          let
-            host = "shamshel";
-            system = aarch64;
-          in
-          lib.nixosSystem {
+      # Home Assistant PC
+      ## This is where I'd put my working NixOS config for my Raspberry Pi,
+      ## IF IT ACTUALLY WANTED TO WORK
+      ### (It stays on Raspberry Pi OS for now)
+      shamshel = {};
+      # Home Server
+      ramiel = 
+        let 
+          host = "ramiel";
+          system = x86_64;
+        in
+        lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit 
+              inputs
+              host;
+          };
+          modules = [
+            ./hosts/${host}/configuration.nix
+            ./modules/nixos
+            inputs.sops-nix.nixosModules.sops
+            inputs.disko.nixosModules.disko
+          ];
+        };
+    };
+    # Home-manager Profiles
+    homeConfigurations = {
+      Adam = 
+        let
+          system = x86_64;
+          user = "adam";
+          pkgs = import nixpkgs {
             inherit system;
-            specialArgs = {
-              inherit 
-                inputs
-                host;
-            };
-            modules = [
-              ./hosts/${host}/configuration.nix
-              ./modules/nixos
-              inputs.sops-nix.nixosModules.sops
-              inputs.disko.nixosModules.disko
-              inputs.nixos-hardware.nixosModules.raspberry-pi-4
-            ];
+            config.allowUnfree = true;
           };
-        
-        # Home Server
-        ramiel = 
-          let 
-            host = "ramiel";
-            system = x86_64;
-          in
-          lib.nixosSystem {
-            inherit system;
-            specialArgs = {
-              inherit 
-                inputs
-                host;
-            };
-            modules = [
-              ./hosts/${host}/configuration.nix
-              ./modules/nixos
-              inputs.sops-nix.nixosModules.sops
-              inputs.disko.nixosModules.disko
-            ];
+        in
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = {
+            inherit 
+              inputs
+              pkgs
+              user
+              ;
           };
-      };
-      # Home-manager Profiles
-      homeConfigurations = {
-        Adam = 
-          let
-            system = x86_64;
-            user = "adam";
-            pkgs = import nixpkgs {
-              inherit system;
-              config.allowUnfree = true;
-            };
-          in
-          home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            extraSpecialArgs = {
-              inherit 
-                inputs
-                pkgs
-                user
-                ;
-            };
-            modules = [
-              ./users/${user}/home.nix
-              inputs.plasma-manager.homeManagerModules.plasma-manager
-              inputs.stylix.homeManagerModules.stylix
-            ];
-          };
+          modules = [
+            ./users/${user}/home.nix
+            inputs.plasma-manager.homeManagerModules.plasma-manager
+            inputs.stylix.homeManagerModules.stylix
+          ];
+        };
 
-        Guest = 
-          let
-            system = x86_64;
-            user = "guest";
-            pkgs = import nixpkgs {
-              inherit system;
-              config.allowUnfree = true;
-            };
-          in
-          home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            extraSpecialArgs = {
-              inherit 
-                inputs
-                pkgs
-                user
-                ;
-            };
-            modules = [
-              ./users/${user}/home.nix
-              inputs.plasma-manager.homeManagerModules.plasma-manager              
-            ];
+      Guest = 
+        let
+          system = x86_64;
+          user = "guest";
+          pkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
           };
-      };
-      # Deploy-rs
-      deploy = {
-        nodes = {
-          lilith.profiles.system = {
-            user = "root";
-            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.lilith;
+        in
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = {
+            inherit 
+              inputs
+              pkgs
+              user
+              ;
           };
-          sachiel.profiles.system = {
-            user = "root";
-            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.sachiel;
-          };
-          shamshel.profiles.system = {
-            user = "root";
-            path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.shamshel;
-          };
-          ramiel.profiles.system = {
-            user = "root";
-            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.ramiel;
-          };
+          modules = [
+            ./users/${user}/home.nix
+            inputs.plasma-manager.homeManagerModules.plasma-manager              
+          ];
+        };
+    };
+    # Deploy-rs
+    deploy = {
+      nodes = {
+        lilith.profiles.system = {
+          user = "root";
+          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.lilith;
+        };
+        sachiel.profiles.system = {
+          user = "root";
+          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.sachiel;
+        };
+        shamshel.profiles.system = {
+          user = "root";
+          path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos self.nixosConfigurations.shamshel;
+        };
+        ramiel.profiles.system = {
+          user = "root";
+          path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.ramiel;
         };
       };
-
-      checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
     };
+
+    checks = builtins.mapAttrs (system: deployLib: deployLib.deployChecks self.deploy) inputs.deploy-rs.lib;
+  };
 }

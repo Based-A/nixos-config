@@ -48,11 +48,17 @@
     nvitop #gpu monitoring
     sourcegit #gui git client
     itch #game store
+    appflowy
     # Rust Dev
     cargo
     rustc
     rustPlatform.bindgenHook
     pkg-config
+    clang_20
+    mold
+    udev
+    alsa-lib
+    zola # Website
   ]++[
     inputs.nix-alien.packages.x86_64-linux.nix-alien
   ];
