@@ -4,8 +4,8 @@
   lib, 
   config,
   host,
-  ... }:
-
+  ... 
+}:
 {
   options = {
     resolve_db.enable = lib.mkEnableOption "enables a davinci resolve project server running in a podman container.";
@@ -266,3 +266,4 @@
     networking.firewall.allowedTCPPorts = [ 9080 ];
   };
 }
+# See: https://github.com/elliotmatson/Docker-Davinci-Resolve-Project-Server

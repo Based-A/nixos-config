@@ -32,6 +32,18 @@
     /* TODO:
     Figure out S3 integration.
     See if there's any other nextcloud apps that I want to install.
+    Figure out password and secret management:
+
+      nextcloudServerPassword = {
+        sopsFile = ./../../modules/secrets/secrets.json;
+        format = "json";
+        owner = config.users.users.nextcloud.name;
+        key = "nextcloudServerPassword";
+        restartUnits = [
+          "nextcloud-setup.service"
+        ];
+        path = "/home/${host}/.config/nextcloud.txt";
+      };
     */
     #Reference: https://wiki.nixos.org/w/index.php?title=Nextcloud
   };

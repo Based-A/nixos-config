@@ -7,7 +7,7 @@
 }:
 {
   options = {
-    power-management.enable = lib.mkEnableOption "enables power-managements settings";
+    power-management.enable = lib.mkEnableOption "enables power-management settings";
   };
 
   config = lib.mkIf config.power-management.enable {

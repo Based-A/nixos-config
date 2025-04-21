@@ -86,7 +86,7 @@
           };
           modules = [
             ./hosts/${host}/configuration.nix
-            ./modules/nixos
+            ./modules
             inputs.sops-nix.nixosModules.sops
           ];
         };
@@ -108,7 +108,7 @@
           };
           modules = [
             ./hosts/${host}/configuration.nix
-            ./modules/nixos
+            ./modules
             inputs.sops-nix.nixosModules.sops
           ];
         };
@@ -129,7 +129,7 @@
           };
           modules = [
             ./hosts/${host}/configuration.nix
-            ./modules/nixos
+            ./modules
             inputs.sops-nix.nixosModules.sops
             inputs.disko.nixosModules.disko
           ];
@@ -155,7 +155,7 @@
           };
           modules = [
             ./hosts/${host}/configuration.nix
-            ./modules/nixos
+            ./modules
             inputs.sops-nix.nixosModules.sops
             inputs.disko.nixosModules.disko
           ];

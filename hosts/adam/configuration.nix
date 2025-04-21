@@ -12,7 +12,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./../../modules/nixos
+    ./../../modules
     inputs.sops-nix.nixosModules.sops
   ];
 
@@ -26,7 +26,6 @@
   ## Services
   podman.enable = true;
   sunshine.enable = true;
-  nextcloud-server.enable = true;
 
   ## Other
   shellAliases.enable = true;
@@ -34,31 +33,17 @@
   ## Packages
   audio-apps.enable = true;
   digital-art.enable = true;
+  rustDev.enable = true;
 
   ## Desktop Environments
   Plasma6.enable = true;
-
-  ## Containers
-  #resolve_db.enable = true;
 
   #System Packages
   environment.systemPackages = with pkgs; [
     home-manager #dotfile manager
     gpu-screen-recorder-gtk #gpu screen recorder
     nvitop #gpu monitoring
-    sourcegit #gui git client
     itch #game store
-    appflowy
-    # Rust Dev
-    cargo
-    rustc
-    rustPlatform.bindgenHook
-    pkg-config
-    clang_20
-    mold
-    udev
-    alsa-lib
-    zola # Website
   ]++[
     inputs.nix-alien.packages.x86_64-linux.nix-alien
   ];
@@ -67,18 +52,7 @@
     defaultSopsFile = ./../../modules/secrets/secrets.json;
     defaultSopsFormat = "json";
     age.keyFile = "/nix/persist/sops/age/keys.txt";
-    secrets = {
-      nextcloudServerPassword = {
-        sopsFile = ./../../modules/secrets/secrets.json;
-        format = "json";
-        owner = config.users.users.nextcloud.name;
-        key = "nextcloudServerPassword";
-        restartUnits = [
-          "nextcloud-setup.service"
-        ];
-        path = "/home/${host}/.config/nextcloud.txt";
-      };
-    };
+    secrets = {};
   };
 
   users = {
@@ -141,6 +115,9 @@
         "nomic-embed-text:latest"
         "qwen2.5-coder:1.5b-base"
       ];
+    };
+    nextjs-ollama-llm-ui = {
+      enable = true;
     };
   };
 

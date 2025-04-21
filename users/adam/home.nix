@@ -26,6 +26,7 @@
 
       # General Apps
       obsidian
+      appflowy
       brave
       thunderbird
       libreoffice
@@ -42,10 +43,9 @@
       obs-studio
       vlc
       localsend
-      fastfetch
       nushell
       btop
-      fzf
+      sourcegit #gui git client
 
       #stylix
       base16-schemes

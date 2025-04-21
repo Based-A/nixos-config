@@ -11,7 +11,7 @@
   imports = [
     # Include the results of the hardware scan.
     #./hardware-configuration.nix
-    ./../../modules/nixos
+    ./../../modules
     inputs.sops-nix.nixosModules.sops
     ./${host}-disko-config.nix
   ];
