@@ -107,7 +107,7 @@
             repeatDelay = 300;
             repeatRate = 40;
           };
-          
+
           mice = [
             {
               acceleration = 0;
@@ -188,7 +188,7 @@
             screen = "all";
             widgets = [
               {
-                kickerdash = {
+                kicker = {
                   icon = "nix-snowflake-white";
                   applicationNameFormat = "nameOnly";
                   categories = {
@@ -217,15 +217,13 @@
                     iconSpacing = "medium";
                   };
                   behavior = {
-                    grouping.method = "byProgramName";
-                    sortingMethod = "alphabetically";
+                    grouping.method = "doNotGroup";
+                    sortingMethod = "manually";
                   };
                   launchers = [
                     "preferred://browser"
-                    "preferred://filemanager"
                     "applications:com.mitchellh.ghostty.desktop"
-                    "applications:code.desktop"
-                    "applications:obsidian.desktop"
+                    "applications:zeditor.desktop"
                     "applications:discord.desktop"
                     "applications:steam.desktop"
                   ];
@@ -277,10 +275,12 @@
                   date.position = "belowTime";
                   time.format = "24h";
                   time.showSeconds = "always";
+                  autoFontAndSize = false;
+                  fontFamily = "Fira Code";
+                  fontSize = 14;
+                  fontStyleName = "Light";
+                  fontWeight = 300;
                 };
-              }
-              {
-                name = "com.himdek.kde.plasma.overview";
               }
             ];
           }
@@ -383,12 +383,11 @@
       kate = {
         enable = false;
       };
-    
+
       ghostwriter = {
         enable = false;
       };
     };
-
 
     fonts.fontconfig = {
       enable = true;

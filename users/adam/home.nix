@@ -20,10 +20,6 @@
     stateVersion = "24.05"; # Please read the comment before changing.
 
     packages = with pkgs; [
-      vscode
-      nixfmt-rfc-style
-      nixd
-
       # General Apps
       obsidian
       appflowy
@@ -45,7 +41,7 @@
       localsend
       nushell
       btop
-      sourcegit #gui git client
+      sourcegit # gui git client
 
       #stylix
       base16-schemes
@@ -55,12 +51,12 @@
   stylix = {
     enable = true;
     autoEnable = true;
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/tokyo-night-storm.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/ayu-mirage.yaml";
     image = ./../../hosts/bebopBackground.png;
     imageScalingMode = "fill";
     polarity = "dark";
   };
-  
+
   programs = {
     git = {
       enable = true;
@@ -78,7 +74,36 @@
         "font-family" = "Fira Code";
       };
     };
-    vscode = {
+    zed-editor = {
+      enable = true;
+      extensions = [
+        "nix"
+        "toml"
+        "html"
+      ];
+      extraPackages = [
+        pkgs.nixd
+        pkgs.clang_20
+        pkgs.mold
+      ];
+      themes = {
+        "mode" = "system";
+        "light" = "One Light";
+        "dark" = "Ayu Mirage";
+      };
+      userSettings = {
+        assistant = {
+          default_model = {
+            provider = "ollama";
+            model = "deepseek-r1:8b";
+          };
+          version = "2";
+        };
+        ui_font_size = lib.mkForce 16.0;
+        buffer_font_size = lib.mkForce 14.0;
+      };
+    };
+    /*vscode = {
       enable = true;
       package = pkgs.vscode;
       profiles.default = {
@@ -110,7 +135,7 @@
           vadimcn.vscode-lldb
         ];
       };
-    };
+    };*/
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
   };

@@ -19,8 +19,10 @@
     neovim
     git
     sops
+    nixfmt-rfc-style
+    nixd
   ];
-  
+
   # Local System Info
   ## Set your time zone.
   time.timeZone = "America/Edmonton";
