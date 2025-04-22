@@ -217,7 +217,7 @@
                     iconSpacing = "medium";
                   };
                   behavior = {
-                    grouping.method = "doNotGroup";
+                    grouping.method = "none";
                     sortingMethod = "manually";
                   };
                   launchers = [
@@ -275,11 +275,6 @@
                   date.position = "belowTime";
                   time.format = "24h";
                   time.showSeconds = "always";
-                  autoFontAndSize = false;
-                  fontFamily = "Fira Code";
-                  fontSize = 14;
-                  fontStyleName = "Light";
-                  fontWeight = 300;
                 };
               }
             ];
