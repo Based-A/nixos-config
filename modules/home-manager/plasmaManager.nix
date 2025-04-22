@@ -223,7 +223,7 @@
                   launchers = [
                     "preferred://browser"
                     "applications:com.mitchellh.ghostty.desktop"
-                    "applications:zeditor.desktop"
+                    "applications:dev.zed.Zed.desktop"
                     "applications:discord.desktop"
                     "applications:steam.desktop"
                   ];
