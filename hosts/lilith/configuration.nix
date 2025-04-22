@@ -33,23 +33,24 @@
 
   ## Packages
   digital-art.enable = true;
+  rustDev.enable = true;
 
-  environment.systemPackages = with pkgs; [
-    home-manager
-    moonlight-qt
-    sourcegit
-  ];
+  environment.systemPackages =
+    with pkgs;
+    [
+      home-manager
+      moonlight-qt
+      sourcegit
+    ]
+    ++ [
+      inputs.nix-alien.packages.x86_64-linux.nix-alien
+    ];
 
   sops = {
     defaultSopsFile = ./../../modules/secrets/secrets.json;
     defaultSopsFormat = "json";
     age.keyFile = "/nix/persist/sops/age/keys.txt";
-    secrets = {
-      nextcloudServerPassword = {
-        format = "json";
-        sopsFile = ./../../modules/secrets/secrets.json;
-      };
-    };
+    secrets = { };
   };
 
   users = {
@@ -77,8 +78,8 @@
       };
     };
     groups = {
-      adam = {};
-      guest = {};
+      adam = { };
+      guest = { };
     };
   };
 
@@ -86,8 +87,9 @@
   programs = {
     firefox.enable = true;
     steam.enable = true;
+    nix-ld.enable = true;
   };
-  
+
   # Services
   services = {
     openssh.enable = true;
@@ -133,7 +135,7 @@
     hostName = "lilith-nixos"; # Define your hostname.
     networkmanager.enable = true; # Enable networking.
     #wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-    firewall.allowedUDPPorts = [ 
+    firewall.allowedUDPPorts = [
       47800
       48002
       48010
