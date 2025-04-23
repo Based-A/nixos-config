@@ -1,6 +1,4 @@
 {
-  pkgs,
-  inputs,
   lib,
   config,
   host,
@@ -20,9 +18,9 @@
         homeRebuild = "home-manager switch --flake .#Adam";
 
         # Dev Shells
-        bevyDev = "nix shell /home/flake/modules/nixShells/bevyShell.nix";
-        godotDev = "nix shell /home/flake/modules/nixshells/godotShell.nix";
-        unrealDev = "nix shell /home/flake/modules/nixshells/unrealShell.nix";
+        bevyDev = "nix-shell /home/flake/modules/nixShells/bevyShell.nix";
+        godotDev = "nix-shell /home/flake/modules/nixshells/godotShell.nix";
+        unrealDev = "nix-shell /home/flake/modules/nixshells/unrealShell.nix";
       };
     };
   };

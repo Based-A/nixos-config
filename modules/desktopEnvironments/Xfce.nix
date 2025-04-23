@@ -2,7 +2,6 @@
   pkgs,
   lib,
   config,
-  host,
   ...
 }:
 {
@@ -30,7 +29,7 @@
       };
       displayManager = {
         sddm.enable = true;
-	      sddm.wayland.enable = true;
+        sddm.wayland.enable = true;
         defaultSession = "wayfire";
       };
     };

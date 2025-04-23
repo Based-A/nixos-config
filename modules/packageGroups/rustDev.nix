@@ -1,9 +1,7 @@
 {
   pkgs,
-  inputs,
   lib,
   config,
-  host,
   ...
 }:
 
@@ -18,6 +16,8 @@
         cargo
         rustc
         rustPlatform.bindgenHook
+        rustfmt
+        clippy
         pkg-config
         clang_20
         mold
@@ -29,6 +29,7 @@
 
       variables = {
         MOLD_LINKER = "${pkgs.mold}";
+        RUST_SRC_PATH = "${pkgs.rustPlatform.rustLibSrc}";
       };
     };
   };

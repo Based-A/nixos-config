@@ -1,7 +1,5 @@
 {
-  pkgs,
   lib,
-  host,
   ...
 }:
 {
@@ -34,7 +32,6 @@
     ./packageGroups/audio-apps.nix
     ./packageGroups/digital-art.nix
     ./packageGroups/rustDev.nix
-
 
   ];
 

@@ -1,9 +1,6 @@
 {
-  inputs,
-  config,
   pkgs,
   lib,
-  user,
   ...
 }:
 
@@ -55,6 +52,10 @@
     image = ./../../hosts/bebopBackground.png;
     imageScalingMode = "fill";
     polarity = "dark";
+
+    targets = {
+      zed.enable = false;
+    };
   };
 
   programs = {
@@ -99,43 +100,57 @@
           };
           version = "2";
         };
+        autosave = {
+          after_delay = {
+            milliseconds = 2000;
+          };
+        };
+        lsp = {
+          rust-analyzer = {
+            initializiation_options = {
+              checkOnSave = false;
+            };
+          };
+        };
         ui_font_size = lib.mkForce 16.0;
         buffer_font_size = lib.mkForce 14.0;
       };
     };
-    /*vscode = {
-      enable = true;
-      package = pkgs.vscode;
-      profiles.default = {
-        enableExtensionUpdateCheck = true;
-        enableUpdateCheck = false;
-        userSettings = lib.mkForce {
-          "[nix]"."serverPath" = "nixd";
-          "[nix]"."enableLanguageServer" = "true";
-          "[nix]"."serverSettings"."nixd"."nixpkgs"."expr" = "import <nixpkgs> { }";
-          "[nix]"."serverSettings"."nixd"."formatting"."command" = "[nixfmt]";
-          "explorer.confirmDragAndDrop" = false;
-          "editor.fontFamily" = "'Fira Code'";
-          "terminal.integrated.fontFamily" = "'Inconsolata'";
-          "editor.cursorBlinking" = "expand";
-          "editor.cursorSmoothCaretAnimation" = "on";
-          "editor.wordWrap" = "on";
-          "rust-analyzer.cargo.extraEnv"."RUSTFLAGS" = "-Clinker=clang -Clink-arg=-fuse-ld=mold";
+    /*
+      vscode = {
+        enable = true;
+        package = pkgs.vscode;
+        profiles.default = {
+          enableExtensionUpdateCheck = true;
+          enableUpdateCheck = false;
+          userSettings = lib.mkForce {
+            "[nix]"."serverPath" = "nixd";
+            "[nix]"."enableLanguageServer" = "true";
+            "[nix]"."serverSettings"."nixd"."nixpkgs"."expr" = "import <nixpkgs> { }";
+            "[nix]"."serverSettings"."nixd"."formatting"."command" = "[nixfmt]";
+            "explorer.confirmDragAndDrop" = false;
+            "editor.fontFamily" = "'Fira Code'";
+            "terminal.integrated.fontFamily" = "'Inconsolata'";
+            "editor.cursorBlinking" = "expand";
+            "editor.cursorSmoothCaretAnimation" = "on";
+            "editor.wordWrap" = "on";
+            "rust-analyzer.cargo.extraEnv"."RUSTFLAGS" = "-Clinker=clang -Clink-arg=-fuse-ld=mold";
+          };
+          extensions = with pkgs.vscode-extensions; [
+            fill-labs.dependi
+            formulahendry.code-runner
+            gruntfuggly.todo-tree
+            jnoortheen.nix-ide
+            johnpapa.vscode-peacock
+            pkief.material-icon-theme
+            rust-lang.rust-analyzer
+            tamasfe.even-better-toml
+            usernamehw.errorlens
+            vadimcn.vscode-lldb
+          ];
         };
-        extensions = with pkgs.vscode-extensions; [
-          fill-labs.dependi
-          formulahendry.code-runner
-          gruntfuggly.todo-tree
-          jnoortheen.nix-ide
-          johnpapa.vscode-peacock
-          pkief.material-icon-theme
-          rust-lang.rust-analyzer
-          tamasfe.even-better-toml
-          usernamehw.errorlens
-          vadimcn.vscode-lldb
-        ];
       };
-    };*/
+    */
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
   };
