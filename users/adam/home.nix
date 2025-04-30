@@ -36,7 +36,6 @@
       obs-studio
       vlc
       localsend
-      nushell
       btop
       sourcegit # gui git client
 
@@ -99,18 +98,6 @@
             model = "deepseek-r1:8b";
           };
           version = "2";
-        };
-        autosave = {
-          after_delay = {
-            milliseconds = 2000;
-          };
-        };
-        lsp = {
-          rust-analyzer = {
-            initializiation_options = {
-              checkOnSave = false;
-            };
-          };
         };
         ui_font_size = lib.mkForce 16.0;
         buffer_font_size = lib.mkForce 14.0;

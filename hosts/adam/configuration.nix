@@ -1,9 +1,6 @@
 {
-  config,
   pkgs,
-  lib,
   inputs,
-  host,
   ...
 }:
 
@@ -39,20 +36,23 @@
   Plasma6.enable = true;
 
   #System Packages
-  environment.systemPackages = with pkgs; [
-    home-manager #dotfile manager
-    gpu-screen-recorder-gtk #gpu screen recorder
-    nvitop #gpu monitoring
-    itch #game store
-  ]++[
-    inputs.nix-alien.packages.x86_64-linux.nix-alien
-  ];
+  environment.systemPackages =
+    with pkgs;
+    [
+      home-manager # dotfile manager
+      gpu-screen-recorder-gtk # gpu screen recorder
+      nvitop # gpu monitoring
+      itch # game store
+    ]
+    ++ [
+      inputs.nix-alien.packages.x86_64-linux.nix-alien
+    ];
 
   sops = {
     defaultSopsFile = ./../../modules/secrets/secrets.json;
     defaultSopsFormat = "json";
     age.keyFile = "/nix/persist/sops/age/keys.txt";
-    secrets = {};
+    secrets = { };
   };
 
   users = {
@@ -75,8 +75,8 @@
       };
     };
     groups = {
-      adam = {};
-      guest = {};
+      adam = { };
+      guest = { };
     };
   };
   # Programs
@@ -87,7 +87,7 @@
     noisetorch.enable = true;
     nix-ld.enable = true;
   };
-  
+
   # Services
   services = {
     openssh.enable = true;
@@ -100,21 +100,17 @@
       pulse.enable = true;
       jack.enable = true;
     };
-    printing.enable = true;
-    avahi = {
-      enable = true;
-      nssmdns4 = true;
-      openFirewall = true;
-    };
+    /*
+      printing.enable = true;
+      avahi = {
+        enable = true;
+        nssmdns4 = true;
+        openFirewall = true;
+        };
+    */
     ollama = {
       enable = true;
       acceleration = "cuda";
-      loadModels = [
-        "deepseek-r1:8b"
-        "llama3.1:8b"
-        "nomic-embed-text:latest"
-        "qwen2.5-coder:1.5b-base"
-      ];
     };
     nextjs-ollama-llm-ui = {
       enable = true;
@@ -131,6 +127,7 @@
         devices = [ "nodev" ];
         efiSupport = true;
         useOSProber = true;
+        timeoutStyle = "hidden";
       };
     };
     kernelPackages = pkgs.linuxPackages_latest;
@@ -152,7 +149,7 @@
     hostName = "adam-nixos"; # Define your hostname.
     networkmanager.enable = true; # Enable networking.
     #wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-    firewall.allowedUDPPorts = [ 
+    firewall.allowedUDPPorts = [
       47800
       48002
       48010
@@ -162,7 +159,6 @@
   environment.sessionVariables = {
     NIXPKGS_ALLOW_UNFREE = "1";
     BROWSER = "app.zen_browser.zen";
-    TERM = "ghostty";
   };
 
   xdg.autostart.enable = true;

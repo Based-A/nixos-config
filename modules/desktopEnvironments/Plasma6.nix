@@ -9,12 +9,14 @@
   };
   config = lib.mkIf config.Plasma6.enable {
     services = {
-      xserver = {
+      /*
+        xserver = {
         xkb = {
           layout = "us";
           variant = "";
         };
-      };
+        };
+      */
       desktopManager.plasma6.enable = true;
       displayManager = {
         sddm = {
@@ -33,8 +35,8 @@
     environment.sessionVariables = {
       NIXOS_OZONE_WL = "1";
       MOZ_ENABLE_WAYLAND = "1";
-      KWIN_DRM_ALLOW_NVIDIA_COLORSPACE = "1";
-      QT_QPA_PLATFORM = "wayland;xcb";
+      #KWIN_DRM_ALLOW_NVIDIA_COLORSPACE = "1";
+      #QT_QPA_PLATFORM = "wayland;xcb";
     };
   };
 }
