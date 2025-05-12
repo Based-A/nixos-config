@@ -39,11 +39,6 @@
     defaultSopsFormat = "json";
 
     age.keyFile = "/nix/persist/sops/age/keys.txt";
-
-    secrets.adam_ssh_key = {
-      path = "/home/macOS/.ssh/id_ed25519";
-      owner = config.users.users.macOS.name;
-    };
   };
 
   users ={
