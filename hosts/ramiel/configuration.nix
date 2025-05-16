@@ -25,12 +25,9 @@
   ## Other
   shellAliases.enable = true;
 
-  ## Desktop Environments
-  Xfce.enable = true;
-
   #System Packages
   environment.systemPackages = with pkgs; [
-    
+
   ];
 
   users = {
@@ -40,12 +37,11 @@
         description = "ramiel-server";
         uid = 1004;
         group = "ramiel-server";
-        extraGroups = [ "wheel" ];
       };
       adam.isNormalUser = true;
     };
     groups = {
-      ramiel-server = {};
+      ramiel-server = { };
     };
   };
 
@@ -54,15 +50,15 @@
     loader = {
       timeout = 5;
     };
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages;
   };
 
   # Networking Options
   networking = {
-    hostName = "shamshel-nixos"; # Define your hostname.
+    hostName = "ramiel-nixos"; # Define your hostname.
     networkmanager.enable = true; # Enable networking.
     #wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-    firewall.allowedUDPPorts = [ 
+    firewall.allowedUDPPorts = [
     ]; # Open ports in the firewall.
   };
 

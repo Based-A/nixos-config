@@ -27,6 +27,7 @@
       (discord.override {
         withVencord = true;
       })
+      manuskript
 
       # Utilities
       zip
@@ -98,6 +99,15 @@
             model = "deepseek-r1:8b";
           };
           version = "2";
+        };
+        lsp = {
+          rust-analyzer = {
+            initialization_options = {
+              rust = {
+                analyzerTargetDir = true;
+              };
+            };
+          };
         };
         ui_font_size = lib.mkForce 16.0;
         buffer_font_size = lib.mkForce 14.0;

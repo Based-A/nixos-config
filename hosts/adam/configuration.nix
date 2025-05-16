@@ -112,9 +112,12 @@
       enable = true;
       acceleration = "cuda";
     };
-    nextjs-ollama-llm-ui = {
-      enable = true;
-    };
+  };
+
+  services.jellyfin = {
+    enable = true;
+    openFirewall = true;
+    user = "adam";
   };
 
   # Boot Options

@@ -1,5 +1,6 @@
 {
   lib,
+  pkgs,
   config,
   ...
 }:
@@ -17,5 +18,9 @@
     };
 
     users.users.adam.extraGroups = [ "podman" ];
+
+    environment.systemPackages = with pkgs; [
+      podman-compose
+    ];
   };
 }
