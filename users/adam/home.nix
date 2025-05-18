@@ -93,13 +93,6 @@
         "dark" = "Ayu Mirage";
       };
       userSettings = {
-        assistant = {
-          default_model = {
-            provider = "ollama";
-            model = "deepseek-r1:8b";
-          };
-          version = "2";
-        };
         lsp = {
           rust-analyzer = {
             initialization_options = {

@@ -43,6 +43,7 @@
       gpu-screen-recorder-gtk # gpu screen recorder
       nvitop # gpu monitoring
       itch # game store
+      lmstudio # llm models
     ]
     ++ [
       inputs.nix-alien.packages.x86_64-linux.nix-alien
@@ -108,10 +109,6 @@
         openFirewall = true;
         };
     */
-    ollama = {
-      enable = true;
-      acceleration = "cuda";
-    };
   };
 
   services.jellyfin = {
