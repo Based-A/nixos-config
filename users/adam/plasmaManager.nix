@@ -10,8 +10,6 @@
     plasmaManager.enable = lib.mkEnableOption "enables the Plasma Manager utilty";
   };
 
-  plasmaManager.enable = lib.mkDefault false;
-
   config = lib.mkIf config.plasmaManager.enable {
     home = {
       packages = with pkgs; [
@@ -222,9 +220,10 @@
                   };
                   launchers = [
                     "preferred://browser"
-                    "applications:com.mitchellh.ghostty.desktop"
+                    "applications:rio.desktop"
                     "applications:dev.zed.Zed.desktop"
                     "applications:discord.desktop"
+                    "applications:ncspot.desktop"
                     "applications:steam.desktop"
                   ];
                 };

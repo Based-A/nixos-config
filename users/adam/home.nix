@@ -23,7 +23,6 @@
       vivaldi
       thunderbird
       libreoffice
-      ghostty
       (discord.override {
         withVencord = true;
       })
@@ -78,14 +77,14 @@
     # Rio Terminal Emulator
     rio = {
       enable = true;
-      settings = {
+      settings = lib.mkForce {
         cursor = {
           shape = "beam";
           blinking = true;
         };
         fonts = {
-          size = 16;
-          family = "Fira Code";
+          size = lib.mkForce 16;
+          family = lib.mkForce "Fira Code";
         };
         navigation = {
           unfocused-split-opacity = 0.8;
