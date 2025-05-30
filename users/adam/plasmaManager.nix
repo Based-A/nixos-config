@@ -10,6 +10,8 @@
     plasmaManager.enable = lib.mkEnableOption "enables the Plasma Manager utilty";
   };
 
+  plasmaManager.enable = lib.mkDefault false;
+
   config = lib.mkIf config.plasmaManager.enable {
     home = {
       packages = with pkgs; [

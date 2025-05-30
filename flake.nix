@@ -54,11 +54,7 @@
       url = "github:serokell/deploy-rs";
     };
   };
-  /*
-    TODO:
-    Add Components:
-      nix-on-droid configuration
-  */
+
   outputs =
     {
       self,
@@ -104,7 +100,6 @@
               inputs.sops-nix.nixosModules.sops
             ];
           };
-
         # Laptop
         lilith =
           let
@@ -126,7 +121,6 @@
               inputs.sops-nix.nixosModules.sops
             ];
           };
-
         # macOS VM
         sachiel =
           let
@@ -148,12 +142,28 @@
               inputs.disko.nixosModules.disko
             ];
           };
-
         # Home Assistant PC
-        ## This is where I'd put my working NixOS config for my Raspberry Pi,
-        ## IF IT ACTUALLY WANTED TO WORK
-        ### (It stays on Raspberry Pi OS for now)
-        shamshel = { };
+        shamshel =
+          let
+            host = "shamshel";
+            system = aarch64;
+          in
+          lib.nixosSystem {
+            inherit system;
+            specialArgs = {
+              inherit
+                inputs
+                host
+                ;
+            };
+            modules = [
+              ./hosts/${host}/configuration.nix
+              ./modules/nixos
+              inputs.sops-nix.nixosModules.sops
+              inputs.disko.nixosModules.disko
+              inputs.nixos-hardware.nixosModules.raspberry-pi-4
+            ];
+          };
         # Home Server
         ramiel =
           let
@@ -188,6 +198,28 @@
               }
             ];
           };
+        # Media Center
+        gaghiel =
+          let
+            host = "gaghiel";
+            system = x86_64;
+          in
+          lib.nixosSystem {
+            inherit system;
+            specialArgs = {
+              inherit
+                inputs
+                lib
+                host
+                ;
+            };
+            modules = [
+              ./hosts/${host}/configuration.nix
+              ./modules
+              inputs.sops-nix.nixosModules.sops
+            ];
+          };
+
       };
       # Home-manager Profiles
       homeConfigurations = {

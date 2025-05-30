@@ -20,6 +20,7 @@
     # Desktop Environments
     ./desktopEnvironments/Plasma6.nix
     ./desktopEnvironments/Xfce.nix
+    ./desktopEnvironments/Cosmic.nix
 
     # Hardware Options
     ./hardwareOptions/bluetooth.nix
@@ -48,6 +49,7 @@
 
   Plasma6.enable = lib.mkDefault false;
   Xfce.enable = lib.mkDefault false;
+  Cosmic.enable = lib.mkDefault false;
 
   bluetooth.enable = lib.mkDefault false;
   file-cleanup.enable = lib.mkDefault true;

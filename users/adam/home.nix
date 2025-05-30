@@ -6,7 +6,7 @@
 
 {
   imports = [
-    ./../../modules/home-manager
+    ./plasmaManager.nix
   ];
 
   plasmaManager.enable = true;
@@ -20,7 +20,7 @@
       # General Apps
       obsidian
       appflowy
-      brave
+      vivaldi
       thunderbird
       libreoffice
       ghostty
@@ -28,6 +28,8 @@
         withVencord = true;
       })
       manuskript
+      ncspot
+      presenterm
 
       # Utilities
       zip
@@ -59,6 +61,11 @@
   };
 
   programs = {
+    # Fzf Fuzzy Finder Utility
+    fzf = {
+      enable = true;
+    };
+    # Git
     git = {
       enable = true;
       userName = "adam";
@@ -68,13 +75,40 @@
         safe.directory = "/home/flake";
       };
     };
-    ghostty = {
+    # Rio Terminal Emulator
+    rio = {
       enable = true;
-      enableBashIntegration = true;
       settings = {
-        "font-family" = "Fira Code";
+        cursor = {
+          shape = "beam";
+          blinking = true;
+        };
+        fonts = {
+          size = 16;
+          family = "Fira Code";
+        };
+        navigation = {
+          unfocused-split-opacity = 0.8;
+        };
+        renderer = {
+          performance = "High";
+          backend = "Automatic";
+          disable-unfocused-render = true;
+          target-fps = 144;
+        };
+        shell = {
+          program = "${pkgs.nushell}/bin/nu";
+        };
+        window = {
+          opacity = 0.9;
+          blue = true;
+          decorations = "Enabled";
+        };
+        line-height = 1.5;
+        working-dir = "/home/";
       };
     };
+    # Zed IDE
     zed-editor = {
       enable = true;
       extensions = [
@@ -93,6 +127,13 @@
         "dark" = "Ayu Mirage";
       };
       userSettings = {
+        terminal = {
+          env = {
+            TERM = "rio";
+          };
+          font_family = "Fira Code";
+          shell = "system";
+        };
         lsp = {
           rust-analyzer = {
             initialization_options = {
@@ -101,46 +142,24 @@
               };
             };
           };
+          nix = {
+            binary = {
+              path_lookup = true;
+            };
+          };
         };
         ui_font_size = lib.mkForce 16.0;
         buffer_font_size = lib.mkForce 14.0;
       };
     };
-    /*
-      vscode = {
-        enable = true;
-        package = pkgs.vscode;
-        profiles.default = {
-          enableExtensionUpdateCheck = true;
-          enableUpdateCheck = false;
-          userSettings = lib.mkForce {
-            "[nix]"."serverPath" = "nixd";
-            "[nix]"."enableLanguageServer" = "true";
-            "[nix]"."serverSettings"."nixd"."nixpkgs"."expr" = "import <nixpkgs> { }";
-            "[nix]"."serverSettings"."nixd"."formatting"."command" = "[nixfmt]";
-            "explorer.confirmDragAndDrop" = false;
-            "editor.fontFamily" = "'Fira Code'";
-            "terminal.integrated.fontFamily" = "'Inconsolata'";
-            "editor.cursorBlinking" = "expand";
-            "editor.cursorSmoothCaretAnimation" = "on";
-            "editor.wordWrap" = "on";
-            "rust-analyzer.cargo.extraEnv"."RUSTFLAGS" = "-Clinker=clang -Clink-arg=-fuse-ld=mold";
-          };
-          extensions = with pkgs.vscode-extensions; [
-            fill-labs.dependi
-            formulahendry.code-runner
-            gruntfuggly.todo-tree
-            jnoortheen.nix-ide
-            johnpapa.vscode-peacock
-            pkief.material-icon-theme
-            rust-lang.rust-analyzer
-            tamasfe.even-better-toml
-            usernamehw.errorlens
-            vadimcn.vscode-lldb
-          ];
-        };
-      };
-    */
+    zoxide = {
+      enable = true;
+      enableBashIntegration = true;
+      enableNushellIntegration = true;
+      options = [
+        "--cmd cd"
+      ];
+    };
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
   };

@@ -1,11 +1,13 @@
 {
+  config,
   pkgs,
   inputs,
+  host,
   ...
 }:
 
 {
-  # Main Workstation Computer
+  # Media Center
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -18,37 +20,22 @@
   ## HardwareOptions
   bluetooth.enable = true;
   file-cleanup.enable = true;
-  nvidia-graphics.enable = true;
+  power-management.enable = false;
 
   ## Services
   podman.enable = true;
-  sunshine.enable = true;
 
   ## Other
   shellAliases.enable = true;
 
-  ## Packages
-  audio-apps.enable = true;
-  digital-art.enable = true;
-  rustDev.enable = true;
-
   ## Desktop Environments
   Plasma6.enable = true;
-  #Cosmic.enable = true;
 
-  #System Packages
-  environment.systemPackages =
-    with pkgs;
-    [
-      home-manager # dotfile manager
-      gpu-screen-recorder-gtk # gpu screen recorder
-      nvitop # gpu monitoring
-      itch # game store
-      lmstudio # llm models
-    ]
-    ++ [
-      inputs.nix-alien.packages.x86_64-linux.nix-alien
-    ];
+  ## Packages
+
+  environment.systemPackages = with pkgs; [
+    moonlight-qt
+  ];
 
   sops = {
     defaultSopsFile = ./../../modules/secrets/secrets.json;
@@ -69,6 +56,11 @@
           "wheel"
         ];
       };
+      root = {
+        openssh.authorizedKeys.keys = [
+          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEVI2t6BAIW6rjeSmsdEWxoJO7vyjYk+Gw5RsUGJAfhc adam@adam-nixos"
+        ];
+      };
       guest = {
         isNormalUser = true;
         description = "guest profile";
@@ -81,13 +73,10 @@
       guest = { };
     };
   };
+
   # Programs
   programs = {
-    firefox.enable = true;
     steam.enable = true;
-    gamemode.enable = true;
-    noisetorch.enable = true;
-    nix-ld.enable = true;
   };
 
   # Services
@@ -96,26 +85,23 @@
     flatpak.enable = true;
     pipewire = {
       enable = true;
-      audio.enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
       jack.enable = true;
     };
-    /*
-      printing.enable = true;
-      avahi = {
-        enable = true;
-        nssmdns4 = true;
-        openFirewall = true;
-        };
-    */
+    printing.enable = true;
+    xserver = {
+      videoDrivers = [ "intel" ];
+    };
   };
 
-  services.jellyfin = {
+  # Hardware
+  hardware.graphics = {
     enable = true;
-    openFirewall = true;
-    user = "adam";
+    extraPackages = with pkgs; [
+      intel-compute-runtime-legacy1
+    ];
   };
 
   # Boot Options
@@ -128,26 +114,14 @@
         devices = [ "nodev" ];
         efiSupport = true;
         useOSProber = true;
-        timeoutStyle = "hidden";
       };
     };
     kernelPackages = pkgs.linuxPackages_latest;
-    supportedFilesystems = [ "ntfs" ];
-  };
-
-  # Mount Windows Partition
-  fileSystems."/run/media/adam/Windows" = {
-    device = "/dev/disk/by-uuid/06C81129C811188F";
-    fsType = "ntfs";
-    options = [
-      "rw"
-      "uid = 1000"
-    ];
   };
 
   # Networking Options
   networking = {
-    hostName = "adam-nixos"; # Define your hostname.
+    hostName = "gaghiel-nixos"; # Define your hostname.
     networkmanager.enable = true; # Enable networking.
     #wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     firewall.allowedUDPPorts = [
@@ -161,8 +135,6 @@
     NIXPKGS_ALLOW_UNFREE = "1";
     BROWSER = "app.zen_browser.zen";
   };
-
-  xdg.autostart.enable = true;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
