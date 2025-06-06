@@ -1,0 +1,44 @@
+anchor_to_edges = true
+height = 30
+position = "top"
+icon_theme = "Paper"
+
+[[start]]
+type = "launcher"
+favorites = []
+show_names = false
+show_icons = true
+
+[[end]]
+type = "volume"
+format = "{icon} {percentage}%"
+max_volume = 100
+
+[end.icons]
+volume_high = "󰕾"
+volume_medium = "󰖀"
+volume_low = "󰕿"
+muted = "󰝟"
+
+[[end]]
+type = "clipboard"
+max_items = 3
+
+[end.truncate]
+mode = "end"
+length = 50
+
+[[end]]
+type = "clock"
+
+[[end]]
+type = "notifications"
+show_count = true
+
+[end.icons]
+closed_none = "󰍥"
+closed_some = "󱥂"
+closed_dnd = "󱅯"
+open_none = "󰍡"
+open_some = "󱥁"
+open_dnd = "󱅮"

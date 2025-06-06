@@ -1,0 +1,30 @@
+Zen Browser = app.zen_browser.zen
+Zed Editor = zeditor
+Rio Terminal = rio
+Steam = env DISPLAY=:0 steam
+Thunderbird = thunderbird --name thunderbird %U
+Obsidian = env DISPLAY=:0 obsidian %u
+LM Studio = env DISPLAY=:0 lm-studio
+Brave Browser = env DISPLAY=:0 brave
+SourceGit = env DISPLAY=:0 SourceGit
+Discord = env DISPLAY=:0 discord
+NoiseTorch = env DISPLAY=:0 noisetorch
+Sunshine = sunshine
+itch.io = env DISPLAY=:0 itch
+LibreOffice = libreoffice
+Gimp = env DISPLAY=:0 gimp-2.10
+Krita = env DISPLAY=:0 krita
+Inkscape = inkscape
+Blender 3.6 = blender
+Ardour = env DISPLAY=:0 ardour8
+Tenacity = env UBUNTU_MENUPROXY=0 tenacity
+LocalSend = localsend_app %U
+VLC Media Player = vlc
+GPU Screen Recorder = gpu-screen-recorder-gtk
+Handbrake = ghb
+qBittorrent = qbittorrent
+OBS Studio = obs
+Bluetooth = blueman-manager
+Printer CUPS = xdg-open http://localhost:631
+NVIDIA Settings = nvidia-settings
+NixOS Manual = nixos-help

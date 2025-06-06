@@ -21,10 +21,7 @@
         pkg-config
         clang_20
         mold
-        udev
-        alsa-lib
         zola # Website
-        mold
       ];
 
       variables = {

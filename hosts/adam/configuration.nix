@@ -29,18 +29,20 @@
 
   ## Packages
   audio-apps.enable = true;
+  corePackages.enable = true;
   digital-art.enable = true;
+  utilities.enable = true;
   rustDev.enable = true;
 
   ## Desktop Environments
   Plasma6.enable = true;
   #Cosmic.enable = true;
+  #NiriWM.enable = true;
 
   #System Packages
   environment.systemPackages =
     with pkgs;
     [
-      home-manager # dotfile manager
       gpu-screen-recorder-gtk # gpu screen recorder
       nvitop # gpu monitoring
       itch # game store
@@ -68,6 +70,7 @@
           "networkmanager"
           "wheel"
         ];
+        shell = pkgs.nushell;
       };
       guest = {
         isNormalUser = true;

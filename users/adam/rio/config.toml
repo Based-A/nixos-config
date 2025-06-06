@@ -1,0 +1,26 @@
+line-height = 1.5
+working-dir = "/home/"
+[cursor]
+blinking = true
+shape = "beam"
+
+[fonts]
+family = "Fira Code"
+size = 16
+
+[navigation]
+unfocused-split-opacity = 0.8
+
+[renderer]
+backend = "Automatic"
+disable-unfocused-render = true
+performance = "High"
+target-fps = 144
+
+[shell]
+program = "/etc/links/nushell/bin/nu"
+
+[window]
+blue = true
+decorations = "Enabled"
+opacity = 0.9

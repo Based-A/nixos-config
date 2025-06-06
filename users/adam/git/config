@@ -1,0 +1,15 @@
+[gpg]
+	format = "openpgp"
+
+[gpg "openpgp"]
+	program = "/nix/store/zf12chbmsxmkidrgafqwf8pw4ldlpdch-gnupg-2.4.7/bin/gpg"
+
+[init]
+	defaultBranch = "main"
+
+[safe]
+	directory = "/home/flake"
+
+[user]
+	email = "adamlundrigan1@gmail.com"
+	name = "adam"

@@ -7,6 +7,7 @@ pkgs.mkShell rec {
     rustc
     rustPlatform.bindgenHook
     pkg-config
+    zed-editor
   ];
   buildInputs = with pkgs; [
     udev

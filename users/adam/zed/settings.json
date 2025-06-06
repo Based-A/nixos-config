@@ -1,0 +1,30 @@
+{
+  "auto_install_extensions": {
+    "html": true,
+    "nix": true,
+    "toml": true
+  },
+  "buffer_font_size": 14.0,
+  "lsp": {
+    "nix": {
+      "binary": {
+        "path_lookup": true
+      }
+    },
+    "rust-analyzer": {
+      "initialization_options": {
+        "rust": {
+          "analyzerTargetDir": true
+        }
+      }
+    }
+  },
+  "terminal": {
+    "env": {
+      "TERM": "rio"
+    },
+    "font_family": "Fira Code",
+    "shell": "system"
+  },
+  "ui_font_size": 16.0
+}

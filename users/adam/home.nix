@@ -17,32 +17,6 @@
     stateVersion = "24.05"; # Please read the comment before changing.
 
     packages = with pkgs; [
-      # General Apps
-      obsidian
-      appflowy
-      vivaldi
-      thunderbird
-      libreoffice
-      (discord.override {
-        withVencord = true;
-      })
-      manuskript
-      ncspot
-      presenterm
-
-      # Utilities
-      zip
-      unzip
-      handbrake
-      qbittorrent
-      obs-studio
-      vlc
-      localsend
-      btop
-      sourcegit # gui git client
-
-      #stylix
-      base16-schemes
     ];
   };
 

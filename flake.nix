@@ -7,30 +7,10 @@
       # Nixpkgs
       url = "github:nixos/nixpkgs/nixos-unstable";
     };
-    stable-nixpkgs = {
-      url = "github:nixos/nixpkgs/nixos-24.11";
-    };
-    home-manager = {
-      # Home-manager
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     sops-nix = {
       # Secrets management
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    #Customization
-    stylix = {
-      # Unify colour schemes
-      url = "github:danth/stylix";
-    };
-    plasma-manager = {
-      # Home-manager options for Plasma6 DE
-      url = "github:nix-community/plasma-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.home-manager.follows = "home-manager";
     };
 
     #Applications
@@ -53,21 +33,21 @@
     deploy-rs = {
       url = "github:serokell/deploy-rs";
     };
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+    };
   };
 
   outputs =
     {
       self,
       nixpkgs,
-      stable-nixpkgs,
-      home-manager,
       sops-nix,
-      stylix,
-      plasma-manager,
       blender-LTS,
       disko,
       nix-alien,
       deploy-rs,
+      nixos-hardware,
       ...
     }@inputs:
 
@@ -79,7 +59,7 @@
     {
       # NixOS Host Machines
       nixosConfigurations = {
-        # Main Workstation
+        # Desktop
         adam =
           let
             host = "adam";
@@ -100,7 +80,7 @@
               inputs.sops-nix.nixosModules.sops
             ];
           };
-        # Laptop
+        # Framework 13 Laptop
         lilith =
           let
             host = "lilith";
@@ -119,9 +99,10 @@
               ./hosts/${host}/configuration.nix
               ./modules
               inputs.sops-nix.nixosModules.sops
+              inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
             ];
           };
-        # macOS VM
+        # HP 250 G3 Notebook (macOS VM)
         sachiel =
           let
             host = "sachiel";
@@ -142,7 +123,7 @@
               inputs.disko.nixosModules.disko
             ];
           };
-        # Home Assistant PC
+        # Raspberry Pi 4
         shamshel =
           let
             host = "shamshel";
@@ -164,7 +145,7 @@
               inputs.nixos-hardware.nixosModules.raspberry-pi-4
             ];
           };
-        # Home Server
+        # Dell PowerEdge R710
         ramiel =
           let
             host = "ramiel";
@@ -183,22 +164,9 @@
               ./modules
               inputs.sops-nix.nixosModules.sops
               inputs.disko.nixosModules.disko
-              {
-                nixpkgs.overlays = [
-                  (final: prev: {
-                    stable = inputs.stable-nixpkgs.legacyPackages.${prev.system};
-                    # use this variant if unfree packages are needed:
-                    unstable = import stable-nixpkgs {
-                      inherit prev;
-                      system = prev.system;
-                      config.allowUnfree = true;
-                    };
-                  })
-                ];
-              }
             ];
           };
-        # Media Center
+        # Thinkpad T560 (Media Center)
         gaghiel =
           let
             host = "gaghiel";
@@ -220,57 +188,6 @@
             ];
           };
 
-      };
-      # Home-manager Profiles
-      homeConfigurations = {
-        Adam =
-          let
-            system = x86_64;
-            user = "adam";
-            pkgs = import nixpkgs {
-              inherit system;
-              config.allowUnfree = true;
-            };
-          in
-          home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            extraSpecialArgs = {
-              inherit
-                inputs
-                pkgs
-                user
-                ;
-            };
-            modules = [
-              ./users/${user}/home.nix
-              inputs.plasma-manager.homeManagerModules.plasma-manager
-              inputs.stylix.homeManagerModules.stylix
-            ];
-          };
-
-        Guest =
-          let
-            system = x86_64;
-            user = "guest";
-            pkgs = import nixpkgs {
-              inherit system;
-              config.allowUnfree = true;
-            };
-          in
-          home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            extraSpecialArgs = {
-              inherit
-                inputs
-                pkgs
-                user
-                ;
-            };
-            modules = [
-              ./users/${user}/home.nix
-              inputs.plasma-manager.homeManagerModules.plasma-manager
-            ];
-          };
       };
       # Deploy-rs
       deploy = {

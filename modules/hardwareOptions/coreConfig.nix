@@ -12,13 +12,18 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs; [
-    neovim
-    git
-    sops
-    nixfmt-rfc-style
-    nixd
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      neovim
+      git
+      sops
+      nixfmt-rfc-style
+      nixd
+    ];
+    etc = {
+      "links/nvim".source = "${pkgs.neovim}/share/applications/nvim.desktop";
+    };
+  };
 
   # Local System Info
   ## Set your time zone.
