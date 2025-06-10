@@ -67,6 +67,7 @@
           "networkmanager"
           "wheel"
         ];
+        shell = pkgs.nushell;
       };
       root = {
         openssh.authorizedKeys.keys = [
@@ -90,6 +91,8 @@
   programs = {
     firefox.enable = true;
     steam.enable = true;
+    gamemode.enable = true;
+    noisetorch.enable = true;
     nix-ld.enable = true;
   };
 
@@ -99,12 +102,13 @@
     flatpak.enable = true;
     pipewire = {
       enable = true;
+      audio.enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
       pulse.enable = true;
       jack.enable = true;
     };
-    printing.enable = true;
+    #printing.enable = true;
     fprintd.enable = true;
     fwupd.enable = true;
   };
