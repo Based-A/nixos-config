@@ -29,8 +29,6 @@
       sessionVariables = {
         NIXOS_OZONE_WL = "1";
         MOZ_ENABLE_WAYLAND = "1";
-        #KWIN_DRM_ALLOW_NVIDIA_COLORSPACE = "1";
-        #QT_QPA_PLATFORM = "wayland;xcb";
       };
       plasma6.excludePackages = with pkgs.kdePackages; [
         plasma-browser-integration
@@ -47,6 +45,26 @@
         ffmpegthumbs
         krdp
       ];
+    };
+
+    fonts = {
+      packages = with pkgs; [
+        (google-fonts.override {
+          fonts = [
+            "Lato" # System / Sans-Serif Font
+            "IBM Plex Mono" # Mono Font
+            "Playfair Display" # Serif Font
+          ];
+        })
+        nerd-fonts.symbols-only # NerdFont Symbols
+      ];
+      fontconfig = {
+        defaultFonts = {
+          sansSerif = [ "Lato" ];
+          serif = [ "Playfair Display" ];
+          monospace = [ "IBM Plex Mono" ];
+        };
+      };
     };
   };
 }

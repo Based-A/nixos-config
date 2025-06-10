@@ -75,12 +75,10 @@
 
     /*
       dotfiles left to configure:
-      - Nushell
       - Yazi
       - swayidle
       - swaylock
       - ianny
-      - Rio
       - Ironbar
       - Niri (keybindings)
       - clapboard?
