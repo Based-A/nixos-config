@@ -1,5 +1,6 @@
 {
   pkgs,
+  host,
   ...
 }:
 {
@@ -12,10 +13,27 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  programs = {
+    git = {
+      enable = true;
+      config = {
+        user = {
+          name = "adam@${host}-nixos";
+          email = "adamlundrigan1@gmail.com";
+        };
+        safe = {
+          directory = "/home/flake";
+        };
+        init = {
+          defaultBranch = "main";
+        };
+      };
+    };
+    neovim.enable = true;
+  };
+
   environment = {
     systemPackages = with pkgs; [
-      neovim
-      git
       sops
       nixfmt-rfc-style
       nixd
