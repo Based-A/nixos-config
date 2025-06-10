@@ -10,9 +10,11 @@
   # Laptop Light Workstation
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    #./hardware-configuration.nix
     ./../../modules
     inputs.sops-nix.nixosModules.sops
+    inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
+    ./${host}-disko-config.nix
   ];
 
   # Modules
@@ -32,15 +34,16 @@
   Plasma6.enable = true;
 
   ## Packages
+  corePackages.enable = true;
   digital-art.enable = true;
-  rustDev.enable = true;
+  utilities.enable = true;
 
   environment.systemPackages =
     with pkgs;
     [
-      home-manager
       moonlight-qt
       sourcegit
+      lmstudio
     ]
     ++ [
       inputs.nix-alien.packages.x86_64-linux.nix-alien
@@ -102,23 +105,19 @@
       jack.enable = true;
     };
     printing.enable = true;
-    xserver = {
-      videoDrivers = [ "intel" ];
-    };
+    fprintd.enable = true;
+    fwupd.enable = true;
   };
 
   # Hardware
   hardware.graphics = {
     enable = true;
-    extraPackages = with pkgs; [
-      intel-compute-runtime-legacy1
-    ];
   };
 
   # Boot Options
   boot = {
     loader = {
-      timeout = 5;
+      timeout = 0;
       efi.canTouchEfiVariables = true;
       grub = {
         enable = true;
@@ -145,7 +144,6 @@
   environment.sessionVariables = {
     NIXPKGS_ALLOW_UNFREE = "1";
     BROWSER = "app.zen_browser.zen";
-    TERM = "ghostty";
   };
 
   # This value determines the NixOS release from which the default

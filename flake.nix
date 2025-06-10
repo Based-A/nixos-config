@@ -99,6 +99,7 @@
               ./hosts/${host}/configuration.nix
               ./modules
               inputs.sops-nix.nixosModules.sops
+              inputs.disko.nixosModules.disko
               inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
             ];
           };
@@ -134,6 +135,7 @@
             specialArgs = {
               inherit
                 inputs
+                lib
                 host
                 ;
             };
@@ -156,6 +158,7 @@
             specialArgs = {
               inherit
                 inputs
+                lib
                 host
                 ;
             };
@@ -207,6 +210,10 @@
           ramiel.profiles.system = {
             user = "root";
             path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.ramiel;
+          };
+          gaghiel.profiles.system = {
+            user = "root";
+            path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations.gaghiel;
           };
         };
       };
