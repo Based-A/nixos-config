@@ -10,7 +10,7 @@
   # Laptop Light Workstation
   imports = [
     # Include the results of the hardware scan.
-    #./hardware-configuration.nix
+    ./hardware-configuration.nix
     ./../../modules
     inputs.sops-nix.nixosModules.sops
     inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
