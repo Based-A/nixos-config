@@ -5,7 +5,7 @@ blinking = true
 shape = "beam"
 
 [fonts]
-family = "Fira Code"
+family = "IBM Plex Mono"
 size = 16
 
 [navigation]
@@ -16,9 +16,6 @@ backend = "Automatic"
 disable-unfocused-render = true
 performance = "High"
 target-fps = 144
-
-[shell]
-program = "/etc/links/nushell/bin/nu"
 
 [window]
 blue = true
