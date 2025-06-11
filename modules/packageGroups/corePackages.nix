@@ -30,6 +30,9 @@
         zoxide # smart cd tool
         stown # dotfile manager
         rio # terminal emulator
+
+        vscode-fhs
+        bashFHS
       ];
       etc = {
         "links/nushell".source = "${pkgs.nushell}/bin/nu";
