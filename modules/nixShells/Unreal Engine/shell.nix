@@ -19,7 +19,7 @@ let
     ]
   );
 in
-pkgs.buildFHSEnv {
+(pkgs.buildFHSEnv {
   name = "UnrealEditor";
 
   targetPkgs =
@@ -57,8 +57,6 @@ pkgs.buildFHSEnv {
       expat
       libdrm
       wayland
-      embree2
-      openusd
     ])
     ++ (with pkgs.xorg; [
       libICE
@@ -94,4 +92,4 @@ pkgs.buildFHSEnv {
     DOTNET_ROOT="${dotnetPkg}";
     DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1;
   '';
-}
+}).env

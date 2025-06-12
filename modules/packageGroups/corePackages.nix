@@ -13,6 +13,7 @@
   config = lib.mkIf config.corePackages.enable {
     programs = {
       yazi.enable = true;
+      direnv.enable = true;
     };
     environment = {
       systemPackages = with pkgs; [
