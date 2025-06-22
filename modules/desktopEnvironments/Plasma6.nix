@@ -32,16 +32,9 @@
       };
       plasma6.excludePackages = with pkgs.kdePackages; [
         plasma-browser-integration
-        ark
         elisa
-        gwenview
-        okular
-        kate
         khelpcenter
-        dolphin
         baloo-widgets
-        dolphin-plugins
-        spectacle
         ffmpegthumbs
         krdp
       ];

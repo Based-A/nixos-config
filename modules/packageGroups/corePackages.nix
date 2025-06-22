@@ -12,7 +12,6 @@
 
   config = lib.mkIf config.corePackages.enable {
     programs = {
-      yazi.enable = true;
       direnv.enable = true;
     };
     environment = {
@@ -21,9 +20,7 @@
         brave # chromium-based browser
         thunderbird # email client
         libreoffice # office suite
-        (discord.override {
-          withVencord = true;
-        }) # better discord
+        vesktop # better discord
         ncspot # tui spotify client
         nushell # cool shell
         zed-editor # text editor
@@ -31,9 +28,8 @@
         zoxide # smart cd tool
         stown # dotfile manager
         rio # terminal emulator
-
-        vscode-fhs
-        bashFHS
+        distrobox # linux vms
+        syncthing # file sync
       ];
       etc = {
         "links/nushell".source = "${pkgs.nushell}/bin/nu";

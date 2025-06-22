@@ -4,9 +4,6 @@
 }:
 {
   imports = [
-    # General
-    ./shellAliases.nix
-
     # App Services
     ./appServices/home-assistant.nix
     ./appServices/nextcloud-server.nix
@@ -40,8 +37,6 @@
   ];
 
   # Module Defaults
-  shellAliases.enable = lib.mkDefault true;
-
   home-assistant.enable = lib.mkDefault false;
   nextcloud-server.enable = lib.mkDefault false;
   podman.enable = lib.mkDefault false;

@@ -14,7 +14,12 @@
       graphics = {
         enable = true;
         package = config.hardware.nvidia.package;
-        extraPackages = [ pkgs.mesa ];
+        extraPackages = with pkgs; [
+          mesa
+          vulkan-validation-layers
+          vulkan-loader
+          vulkan-tools
+        ];
       };
       nvidia = {
         modesetting.enable = true;

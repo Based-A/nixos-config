@@ -12,7 +12,7 @@
   config = lib.mkIf config.sunshine.enable {
     services.sunshine = {
       enable = true;
-      autoStart = false;
+      autoStart = true;
       openFirewall = true;
       capSysAdmin = true;
     };

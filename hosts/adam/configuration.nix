@@ -24,15 +24,11 @@
   podman.enable = true;
   sunshine.enable = true;
 
-  ## Other
-  shellAliases.enable = true;
-
   ## Packages
   audio-apps.enable = true;
   corePackages.enable = true;
   digital-art.enable = true;
   utilities.enable = true;
-  rustDev.enable = true;
 
   ## Desktop Environments
   Plasma6.enable = true;
@@ -47,9 +43,6 @@
       nvitop # gpu monitoring
       itch # game store
       lmstudio # llm models
-    ]
-    ++ [
-      inputs.nix-alien.packages.x86_64-linux.nix-alien
     ];
 
   sops = {
@@ -84,12 +77,12 @@
       guest = { };
     };
   };
+
   # Programs
   programs = {
     firefox.enable = true;
     steam.enable = true;
     gamemode.enable = true;
-    noisetorch.enable = true;
     nix-ld.enable = true;
   };
 
@@ -124,7 +117,7 @@
   # Boot Options
   boot = {
     loader = {
-      timeout = 5;
+      timeout = 0;
       efi.canTouchEfiVariables = true;
       grub = {
         enable = true;
@@ -134,18 +127,8 @@
         timeoutStyle = "hidden";
       };
     };
-    kernelPackages = pkgs.linuxPackages_6_14;
+    kernelPackages = pkgs.linuxPackages;
     supportedFilesystems = [ "ntfs" ];
-  };
-
-  # Mount Windows Partition
-  fileSystems."/run/media/adam/Windows" = {
-    device = "/dev/disk/by-uuid/06C81129C811188F";
-    fsType = "ntfs";
-    options = [
-      "rw"
-      "uid = 1000"
-    ];
   };
 
   # Networking Options
