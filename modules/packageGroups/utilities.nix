@@ -14,7 +14,7 @@
     environment.systemPackages = with pkgs; [
       zip
       unzip
-      handbrake
+      #handbrake
       qbittorrent
       obs-studio
       vlc
