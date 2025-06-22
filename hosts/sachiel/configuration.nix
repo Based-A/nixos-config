@@ -15,7 +15,10 @@
     inputs.sops-nix.nixosModules.sops
     ./${host}-disko-config.nix
   ];
-
+  /*
+    TODO:
+    Fix desktop components.
+  */
   # Modules
 
   ## HardwareOptions
@@ -41,7 +44,7 @@
     age.keyFile = "/nix/persist/sops/age/keys.txt";
   };
 
-  users ={
+  users = {
     users = {
       macOS = {
         isNormalUser = true;
@@ -57,11 +60,11 @@
       };
     };
     groups = {
-      macOS = {};
+      macOS = { };
     };
   };
 
-#nix run github:nix-community/nixos-anywhere -- --flake ./home/flake#sachiel --generate-hardware-config nixos-generate-config ./hosts/sachiel/hardware-configuration.nix root@192.168.50.248
+  #nix run github:nix-community/nixos-anywhere -- --flake ./home/flake#sachiel --generate-hardware-config nixos-generate-config ./hosts/sachiel/hardware-configuration.nix root@192.168.50.248
   #Git Config
   programs.git.config = {
     init.defaultBranch = "main";
@@ -76,8 +79,8 @@
       knownHosts = {
         adam-nixos = {
           publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEVI2t6BAIW6rjeSmsdEWxoJO7vyjYk+Gw5RsUGJAfhc";
-          hostNames = [ 
-            "adam@adam-nixos" 
+          hostNames = [
+            "adam@adam-nixos"
             "192.168.50.143"
           ];
         };

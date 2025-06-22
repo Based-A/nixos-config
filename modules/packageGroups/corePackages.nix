@@ -16,12 +16,8 @@
     };
     environment = {
       systemPackages = with pkgs; [
-        obsidian # knowledge base
         brave # chromium-based browser
-        thunderbird # email client
-        libreoffice # office suite
         vesktop # better discord
-        ncspot # tui spotify client
         nushell # cool shell
         zed-editor # text editor
         fzf # fuzzy finder

@@ -10,7 +10,7 @@
   # Laptop Light Workstation
   imports = [
     # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    #./hardware-configuration.nix
     ./../../modules
     inputs.sops-nix.nixosModules.sops
     inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
@@ -27,9 +27,6 @@
   ## Services
   podman.enable = true;
 
-  ## Other
-  shellAliases.enable = true;
-
   ## Desktop Environments
   Plasma6.enable = true;
 
@@ -38,16 +35,14 @@
   digital-art.enable = true;
   utilities.enable = true;
 
-  environment.systemPackages =
-    with pkgs;
-    [
-      moonlight-qt
-      sourcegit
-      lmstudio
-    ]
-    ++ [
-      inputs.nix-alien.packages.x86_64-linux.nix-alien
-    ];
+  environment.systemPackages = with pkgs; [
+    moonlight-qt
+    sourcegit
+    obsidian # knowledge base
+    thunderbird # email client
+    libreoffice # office suite
+    ncspot # tui spotify client
+  ];
 
   sops = {
     defaultSopsFile = ./../../modules/secrets/secrets.json;
@@ -69,11 +64,6 @@
         ];
         shell = pkgs.nushell;
       };
-      root = {
-        openssh.authorizedKeys.keys = [
-          "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEVI2t6BAIW6rjeSmsdEWxoJO7vyjYk+Gw5RsUGJAfhc adam@adam-nixos"
-        ];
-      };
       guest = {
         isNormalUser = true;
         description = "guest profile";
@@ -92,8 +82,6 @@
     firefox.enable = true;
     steam.enable = true;
     gamemode.enable = true;
-    noisetorch.enable = true;
-    nix-ld.enable = true;
   };
 
   # Services

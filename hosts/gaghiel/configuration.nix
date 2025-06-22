@@ -5,7 +5,13 @@
   host,
   ...
 }:
-
+/*
+  TODO:
+  Create media-focused desktop environment.
+  Jellyfin Server
+  ARR Stack
+  NGINX?
+*/
 {
   # Media Center
   imports = [

@@ -25,7 +25,6 @@
   sunshine.enable = true;
 
   ## Packages
-  audio-apps.enable = true;
   corePackages.enable = true;
   digital-art.enable = true;
   utilities.enable = true;
@@ -36,14 +35,11 @@
   #NiriWM.enable = true;
 
   #System Packages
-  environment.systemPackages =
-    with pkgs;
-    [
-      gpu-screen-recorder-gtk # gpu screen recorder
-      nvitop # gpu monitoring
-      itch # game store
-      lmstudio # llm models
-    ];
+  environment.systemPackages = with pkgs; [
+    gpu-screen-recorder-gtk # gpu screen recorder
+    nvitop # gpu monitoring
+    itch # game store
+  ];
 
   sops = {
     defaultSopsFile = ./../../modules/secrets/secrets.json;
@@ -98,6 +94,7 @@
       pulse.enable = true;
       jack.enable = true;
     };
+    fwupd.enable = true;
     /*
       printing.enable = true;
       avahi = {
@@ -128,7 +125,6 @@
       };
     };
     kernelPackages = pkgs.linuxPackages;
-    supportedFilesystems = [ "ntfs" ];
   };
 
   # Networking Options

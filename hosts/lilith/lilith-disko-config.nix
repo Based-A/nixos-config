@@ -28,7 +28,7 @@
               size = "400G";
               content = {
                 type = "filesystem";
-                format = "ext4";
+                format = "btrfs";
                 mountpoint = "/";
               };
             };

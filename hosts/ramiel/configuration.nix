@@ -7,19 +7,25 @@
 
 {
   imports = [
-    # Include the results of the hardware scan.
     #./hardware-configuration.nix
     ./../../modules
     inputs.sops-nix.nixosModules.sops
   ];
-
+  /*
+    TODO:
+    Homepage - Dashboard
+    Leantime Container
+    Nextcloud Container
+    Mattermost Container
+    Forgejo Container
+    Jenkins Container
+  */
   # Modules
 
   ## HardwareOptions
   file-cleanup.enable = true;
 
   ## Services
-  #nextcloud-server.enable = true;
   podman.enable = true;
 
   ## Other
