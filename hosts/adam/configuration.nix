@@ -36,7 +36,6 @@
 
   #System Packages
   environment.systemPackages = with pkgs; [
-    gpu-screen-recorder-gtk # gpu screen recorder
     nvitop # gpu monitoring
     itch # game store
   ];
@@ -142,6 +141,7 @@
   environment.sessionVariables = {
     NIXPKGS_ALLOW_UNFREE = "1";
     BROWSER = "app.zen_browser.zen";
+    VK_ICD_FILENAMES = "/run/host/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
   };
 
   xdg.autostart.enable = true;

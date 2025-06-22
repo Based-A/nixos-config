@@ -26,6 +26,8 @@
         rio # terminal emulator
         distrobox # linux vms
         syncthing # file sync
+        sourcegit # visual git client
+        gpu-screen-recorder-gtk # gpu screen recorder
       ];
       etc = {
         "links/nushell".source = "${pkgs.nushell}/bin/nu";
