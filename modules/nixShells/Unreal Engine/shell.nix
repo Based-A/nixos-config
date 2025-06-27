@@ -19,7 +19,8 @@ let
     ]
   );
 in
-(pkgs.buildFHSEnv {
+# (
+pkgs.buildFHSEnv {
   name = "UnrealEditor";
 
   targetPkgs =
@@ -92,4 +93,4 @@ in
     DOTNET_ROOT="${dotnetPkg}";
     DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1;
   '';
-}).env
+} # ).env
