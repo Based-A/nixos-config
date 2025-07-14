@@ -13,13 +13,16 @@
   config = lib.mkIf config.corePackages.enable {
     programs = {
       direnv.enable = true;
+      fish.enable = true;
     };
     environment = {
       systemPackages = with pkgs; [
         brave # chromium-based browser
         vesktop # better discord
-        nushell # cool shell
         zed-editor # text editor
+        obsidian # knowledge base
+        thunderbird # email client
+        libreoffice # office suite
         fzf # fuzzy finder
         zoxide # smart cd tool
         stown # dotfile manager
@@ -30,7 +33,7 @@
         gpu-screen-recorder-gtk # gpu screen recorder
       ];
       etc = {
-        "links/nushell".source = "${pkgs.nushell}/bin/nu";
+        #"links/fish".source = "${pkgs.fish}/bin/fish";
         "links/zed-editor".source = "${pkgs.zed-editor}/bin/zeditor";
       };
     };

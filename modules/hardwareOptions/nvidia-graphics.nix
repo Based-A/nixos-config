@@ -27,12 +27,11 @@
         #package = config.boot.kernelPackages.nvidiaPackages.production;
         package = config.boot.kernelPackages.nvidiaPackages.latest;
       };
-      #nvidia-container-toolkit.enable = true;
+      nvidia-container-toolkit.enable = true;
     };
     services.xserver.videoDrivers = [ "nvidia" ];
     environment.systemPackages = with pkgs; [
       cudaPackages.cudatoolkit
-      nvidia-container-toolkit
     ];
     /*
       boot.extraModprobeConfig = ''

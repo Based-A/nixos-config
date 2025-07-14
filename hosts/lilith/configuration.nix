@@ -36,9 +36,6 @@
 
   environment.systemPackages = with pkgs; [
     moonlight-qt
-    obsidian # knowledge base
-    thunderbird # email client
-    libreoffice # office suite
     ncspot # tui spotify client
   ];
 
@@ -60,7 +57,7 @@
           "networkmanager"
           "wheel"
         ];
-        shell = pkgs.nushell;
+        shell = pkgs.fish;
       };
       guest = {
         isNormalUser = true;
