@@ -12,7 +12,7 @@
 
   config = lib.mkIf config.digital-art.enable {
     environment.systemPackages = with pkgs; [
-      gimp
+      #gimp
       krita
       inkscape-with-extensions
       opentabletdriver # tablet drivers
