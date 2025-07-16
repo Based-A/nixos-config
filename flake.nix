@@ -99,7 +99,6 @@
               ./hosts/${host}/configuration.nix
               ./modules
               inputs.sops-nix.nixosModules.sops
-              inputs.disko.nixosModules.disko
               inputs.nixos-hardware.nixosModules.framework-amd-ai-300-series
             ];
           };

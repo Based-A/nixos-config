@@ -15,7 +15,6 @@
       gimp
       krita
       inkscape-with-extensions
-      #davinci-resolve
       opentabletdriver # tablet drivers
     ];
   };

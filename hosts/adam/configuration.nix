@@ -1,6 +1,7 @@
 {
   pkgs,
   inputs,
+  config,
   ...
 }:
 
@@ -18,7 +19,6 @@
   ## HardwareOptions
   bluetooth.enable = true;
   file-cleanup.enable = true;
-  nvidia-graphics.enable = true;
 
   ## Services
   podman.enable = true;
@@ -38,6 +38,7 @@
   environment.systemPackages = with pkgs; [
     nvitop # gpu monitoring
     itch # game store
+    cudaPackages.cudatoolkit
   ];
 
   sops = {
@@ -123,8 +124,35 @@
         timeoutStyle = "hidden";
       };
     };
-    kernelPackages = pkgs.linuxPackages;
+    kernelPackages = pkgs.linuxPackages_latest;
   };
+
+  # NVIDIA GPU Options
+  hardware = {
+    graphics = {
+      enable = true;
+      package = config.hardware.nvidia.package;
+      extraPackages = with pkgs; [
+        mesa
+      ];
+    };
+    nvidia = {
+      modesetting.enable = true;
+      powerManagement.enable = false;
+      powerManagement.finegrained = false;
+      nvidiaSettings = true;
+      open = true;
+      #package = config.boot.kernelPackages.nvidiaPackages.production;
+      package = config.boot.kernelPackages.nvidiaPackages.latest;
+    };
+    nvidia-container-toolkit.enable = true;
+  };
+  services.xserver.videoDrivers = [ "nvidia" ];
+  /*
+    boot.extraModprobeConfig = ''
+    options nvidia_modeset vblank_sem_control=0
+    '';
+  */
 
   # Networking Options
   networking = {

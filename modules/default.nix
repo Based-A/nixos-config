@@ -24,7 +24,6 @@
     ./hardwareOptions/bluetooth.nix
     ./hardwareOptions/coreConfig.nix
     ./hardwareOptions/file-cleanup.nix
-    ./hardwareOptions/nvidia-graphics.nix
     ./hardwareOptions/power-management.nix
 
     # Package Groups
@@ -52,7 +51,6 @@
 
   bluetooth.enable = lib.mkDefault false;
   file-cleanup.enable = lib.mkDefault true;
-  nvidia-graphics.enable = lib.mkDefault false;
   power-management.enable = lib.mkDefault false;
 
   audio-apps.enable = lib.mkDefault false;
