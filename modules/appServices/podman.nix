@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  host,
   ...
 }:
 {
@@ -17,7 +18,7 @@
       defaultNetwork.settings.dns_enabled = true;
     };
 
-    users.users.adam.extraGroups = [ "podman" ];
+    users.users.${host}.extraGroups = [ "podman" ];
 
     environment.systemPackages = with pkgs; [
       podman-compose

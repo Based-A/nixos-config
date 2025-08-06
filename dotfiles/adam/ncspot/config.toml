@@ -1,0 +1,15 @@
+command_key = ":"
+initial_screen = "library"
+use_nerdfont = true
+flip_status_indicators = false
+audio_cache = true
+volnorm = true
+default_keybindings = true
+notify = true
+bitrate = 320
+gapless = true
+shuffle = true
+repeat = "playlist"
+playback_state = "Paused"
+library_tabs = ["playlists", "albums", "tracks", "podcasts", "browse"]
+hide_display_names = true

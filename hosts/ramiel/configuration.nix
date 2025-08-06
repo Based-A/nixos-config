@@ -13,11 +13,7 @@
   ];
   /*
     TODO:
-    Homepage - Dashboard
-    Leantime Container
     Nextcloud Container
-    Mattermost Container
-    Forgejo Container
     Jenkins Container
   */
   # Modules
@@ -27,9 +23,6 @@
 
   ## Services
   podman.enable = true;
-
-  ## Other
-  shellAliases.enable = true;
 
   #System Packages
   environment.systemPackages = with pkgs; [

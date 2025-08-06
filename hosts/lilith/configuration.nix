@@ -1,4 +1,5 @@
 {
+  lib,
   pkgs,
   inputs,
   host,
@@ -31,6 +32,7 @@
   ## Packages
   corePackages.enable = true;
   digital-art.enable = true;
+  rustDev.enable = true;
   utilities.enable = true;
 
   environment.systemPackages = with pkgs; [
@@ -112,7 +114,7 @@
         useOSProber = true;
       };
     };
-    kernelPackages = pkgs.linuxPackages_latest;
+    kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
   };
 
   # Networking Options

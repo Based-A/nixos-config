@@ -20,6 +20,7 @@
         brave # chromium-based browser
         vesktop # better discord
         zed-editor # text editor
+        vscodium-fhs # bevy development
         obsidian # knowledge base
         thunderbird # email client
         libreoffice # office suite
